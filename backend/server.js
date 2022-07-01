@@ -22,7 +22,7 @@ app.use(helmet());
 app.use(morgan('common'));
 app.use(express.urlencoded({ extended: true }));
 
-const port = process.env.PORT || 8080
+const port = process.env.PORT
 
 mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
 const connection = mongoose.connection;
