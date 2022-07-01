@@ -1,0 +1,131 @@
+.chat-full-container{
+    margin-top: 2rem;
+}
+
+.messenger-header{
+    text-align: center;
+}
+
+.people-header{
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.users-container{
+    padding-left: 7px;
+    padding-right: 7px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.123);
+}
+
+.users-box{
+    margin-bottom: 20px;
+    text-align: center;
+    background-color: rgb(218, 218, 218);
+    padding: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.123);
+    transition: 0.3s ease;
+}
+.users-box:hover{
+    cursor: pointer;
+    background-color: rgb(206, 206, 206);
+}
+
+.chats-header{
+    text-align: center;
+}
+.display-chat-container{
+    // border-left: 1px solid black;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.123);
+    padding: 0px;
+}
+.display-chats{
+    height: 65vh;
+    overflow-y: scroll;
+    padding: 5%;
+    background-color: rgba(243, 242, 242, 0.37);
+}
+.display-chats::-webkit-scrollbar {
+    width: 5px;
+    border-radius: 10px;
+}
+/* Track */
+.display-chats::-webkit-scrollbar-track {
+  background: transparent;
+}
+  /* Handle */
+.display-chats::-webkit-scrollbar-thumb {
+    background: gray;
+}
+/* Handle on hover */
+.display-chats::-webkit-scrollbar-thumb:hover {
+    background: rgb(94, 94, 94)gray;
+}
+
+.avatar{
+    display: flex;
+    flex-direction: row;
+}
+.message{
+    width: 50%;
+    margin-left: 10px;
+    background-color: aqua;
+    padding: 10px;
+    border-radius: 15px;
+    border-top-left-radius: 0;
+    margin-top: 20px;
+}
+.message-sent-time{
+    margin-left: 55px;
+    margin-top: -16px;
+    text-align: left;
+    font-size: 12px;
+    color: gray;
+}
+.message-box.own .message{
+    width: 50%;
+    margin-right: 10px;
+    background-color: greenyellow;
+    padding: 10px;
+    border-radius: 13px;
+    border-top-right-radius: 0;
+    margin-top: 20px;
+}
+.message-box.own .avatar{
+    display: flex;
+    flex-direction: row-reverse;
+}
+.message-box.own .message-sent-time{
+    margin-right: 55px;
+    margin-top: -16px;
+    text-align: right;
+}
+
+.send-message-container{
+}
+.send-message{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid rgba(223, 223, 223, 0.384);
+    padding: 10px;
+}
+.message-textbox{
+    width: 90%;
+    border: none;
+    outline: none;
+    resize: none;
+    overflow: hidden;
+}
+.message-textbox::placeholder{
+    font-size: 1.1rem;
+    color: rgb(189, 189, 189);
+}
+
+.send-message-btn{
+    height: 30px;
+}
+
+.profile-header{
+    text-align: center;
+}

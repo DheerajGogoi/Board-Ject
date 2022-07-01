@@ -1,0 +1,58 @@
+.projects{
+    // margin-left: 20%;
+    // width: 80%;
+    // height: 100vh;
+    // padding: 20px;
+
+    .projects-container{
+        // overflow-y: scroll;
+        // height: 95vh;
+
+        .all-projects-box{
+
+            .col-lg-4{
+                padding: 20px;
+
+                .proj-type-header{
+                    text-align: center;
+                    padding: 2px;
+                    border-radius: 5px;
+                }
+
+                .no-status{
+                    background-color: rgba(128, 128, 128, 0.062);
+                }
+
+                .in-progress{
+                    background-color: #dcec0060
+                }
+
+                .completed{
+                    background-color: #13a00046;
+                }
+
+                .proj-add-btn{
+                    width: 100%;
+                }
+
+                .proj-cards-container{
+                    margin-top: 2rem;
+                }
+            }
+        }
+    }
+
+    .add-proj-box{
+        display: block;
+        text-align: center;
+        form{
+            display: inline-block;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: left;
+            .input{
+                margin-bottom: 2rem;
+            }
+        }
+    }
+}

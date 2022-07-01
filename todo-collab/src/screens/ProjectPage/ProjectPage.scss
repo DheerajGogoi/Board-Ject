@@ -1,0 +1,89 @@
+.proj-page{
+    // margin-left: 20%;
+    // width: 80%;
+    // height: 100vh;
+    // padding: 20px;
+    // overflow-y: scroll;
+
+    .proj-page-container{
+
+        .proj-form-full{
+            display: block;
+            text-align: center;
+
+            .proj-details-form{
+                display: inline-block;
+                margin-left: auto;
+                margin-right: auto;
+                text-align: left;
+                
+                .input{
+                    margin-bottom: 2rem;
+
+                    .input-field{
+                        width: 700px;
+                    }
+                }
+
+                .form-btn{
+                    text-transform: none;
+                    margin-bottom: 2rem;
+                }
+
+                div{
+                    .task-list{
+                        .todo-tasks{
+                            .task-box{
+                                display: flex;
+                                flex-direction: row;
+                                justify-content: space-between;
+                                margin-bottom: 10px;
+                                border-radius: 5px;
+                                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.171);
+
+                                .task-text{
+                                    display: flex;
+                                    flex-direction: row;
+
+                                    .text{
+                                        align-self: center;
+                                        margin-bottom: 5px;
+                                    }
+                                }
+                            }
+                        }
+                        .completed-tasks{
+                            p{
+                                margin-top: 2rem;
+                            }
+                            
+                            .task-box{
+                                display: flex;
+                                flex-direction: row;
+                                justify-content: space-between;
+                                margin-bottom: 10px;
+                                border-radius: 5px;
+                                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.171);
+
+                                .task-text{
+                                    display: flex;
+                                    flex-direction: row;
+                                    
+                                    .text{
+                                        align-self: center;
+                                        text-decoration: line-through;
+                                        margin-bottom: 5px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .add-proj-box{
+        display: flex;
+    }
+}

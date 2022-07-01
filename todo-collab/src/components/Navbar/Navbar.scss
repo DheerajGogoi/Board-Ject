@@ -1,0 +1,17 @@
+.navbar-box{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    background-color: white;
+
+    .navbar-items{
+        align-self: center;
+        margin-left: 20px;
+
+        .menu-btn{
+            font-weight: bold;
+            text-transform: none;
+        }
+    }
+}
