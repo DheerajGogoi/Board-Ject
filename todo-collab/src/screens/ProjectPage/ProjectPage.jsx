@@ -370,11 +370,7 @@ function ProjectPage() {
                         
                         <form className='proj-details-form' autoComplete='off' onSubmit={handleSubmit}>
                             
-                            <div style={{
-                                display: 'flex',
-                                flexDirection: 'row',
-                                marginLeft: '-3.2rem'
-                            }}>
+                            <div className='proj-header'>
                                 <div>
                                     <IconButton onClick={handleNav}>
                                         <ArrowBackIcon style={{
@@ -388,20 +384,16 @@ function ProjectPage() {
                                 </div>
                             </div>
 
-                            <div style={{
-                                marginBottom: '2rem'
-                            }}>
+                            <div className='proj-thumb-box'>
                                 {
                                     localThumbUrl &&
                                     <p>Project Thumbnail</p>
                                 }
                                 {
                                     localThumbUrl &&
-                                    <img src={localThumbUrl} alt="thumbnail" style={{ width: '700px' }} />
+                                    <img src={localThumbUrl} alt="thumbnail" className='img-fluid' />
                                 }
-                                <div style={{
-                                    marginTop: '1.2rem'
-                                }}>
+                                <div className='edit-thumb-btn'>
                                     <Button
                                     variant='contained'
                                     color='primary'
@@ -410,10 +402,12 @@ function ProjectPage() {
                                     }}
                                     onClick={handleModalOpen}
                                     >
-                                        <CreateIcon style={{ fontSize: '18px', marginRight: '10px' }} /> Edit thumbnail
+                                        <CreateIcon style={{
+                                            fontSize: '18px',
+                                            marginRight: '10px'
+                                        }} /> Edit thumbnail
                                     </Button>
                                     <br />
-                                    {/* <input type="file" onChange={handleThumbChange} /> */}
                                 </div>
 
                             </div>
@@ -449,9 +443,7 @@ function ProjectPage() {
                                 />
                             </div>
 
-                            <div style={{
-                                marginBottom: '2rem'
-                            }}>
+                            <div className='date-box'>
                                 <p>Due date for the project (DD/MM/YYYY)</p>
                                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                                     <KeyboardDatePicker
@@ -463,39 +455,19 @@ function ProjectPage() {
                                         KeyboardButtonProps={{
                                             'aria-label': 'change date',
                                         }}
-                                        style={{
-                                            width: '700px'
-                                        }}
                                     />
                                 </MuiPickersUtilsProvider>
                             </div>
 
                             <div className='input'>
                                 
-                                <div style={{
-                                    width: '700px',
-                                    display: 'flex',
-                                    flexDirection: 'row',
-                                    justifyContent: 'space-between'
-                                }}>
-                                    {/* <div>
-                                        <TextField
-                                        id="standard-basic"
-                                        placeholder="Add members through email"
-                                        value={memberEmail}
-                                        className='input-field'
-                                        onChange={(e)=>{
-                                            setMemberEmail(e.target.value);
-                                        }}
-                                        />
-                                    </div> */}
+                                <div className='auto-comp-container'>
 
-                                    <div>
+                                    <div className='auto-comp'>
                                         <Autocomplete
                                             id="combo-box-demo"
                                             options={emails}
                                             getOptionLabel={(option) => option.title}
-                                            style={{ width: 300 }}
                                             renderInput={(params) => 
                                                 <TextField
                                                 {...params}
@@ -531,20 +503,11 @@ function ProjectPage() {
                                 </div>
                             </div>
 
-                            <div style={{
-                                marginBottom: '2rem',
-                                width: '700px'
-                            }}>
+                            <div className='proj-mem-box'>
                                 {
                                     projMembers.map((item, index) => {
                                         return (
-                                            <span key={index} className="badge badge-secondary" style={{
-                                                fontSize: '16px',
-                                                fontWeight: 'normal',
-                                                padding: '10px',
-                                                marginRight: '10px',
-                                                marginBottom: '10px'
-                                            }}>{item} <ClearIcon style={{
+                                            <span key={index} className="badge badge-secondary proj-mem">{item} <ClearIcon style={{
                                                 fontSize: '20px',
                                                 marginLeft: '10px',
                                                 cursor: 'pointer'
@@ -557,22 +520,14 @@ function ProjectPage() {
                                 }
                             </div>
 
-                            <div style={{
+                            <div className='task-box' style={{
                                 marginBottom: '2rem'
                             }}>
                                 <p>Tasks</p>
-                                <div style={{
-                                    width: '700px',
-                                    display: 'flex',
-                                    flexDirection: 'row',
-                                    justifyContent: 'space-between'
-                                }}>
+                                <div className='task-container'>
                                     <div>
                                         <TextField
                                         variant='standard'
-                                        style={{
-                                            width: '630px'
-                                        }}
                                         value={task}
                                         onChange={e => setTask(e.target.value)}
                                         placeholder='Add task'
@@ -588,10 +543,7 @@ function ProjectPage() {
                                     </div>
                                 </div>
 
-                                <div style={{
-                                    padding: '10px 60px 10px 40px',
-                                    maxWidth: '700px',
-                                }} className='task-list'>
+                                <div className='task-list'>
                                     <div className='todo-tasks'>
                                         <p><b>Pending ({localTodo.length})</b></p>
                                         {

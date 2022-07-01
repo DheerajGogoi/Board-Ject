@@ -16,12 +16,63 @@
                 margin-left: auto;
                 margin-right: auto;
                 text-align: left;
+
+                .proj-header{
+                    display: flex;
+                    flex-direction: row;
+                    margin-left: -3.2rem;
+                    padding: 10px;
+                }
+
+                .proj-thumb-box{
+                    margin-bottom: 2rem;
+
+                    .edit-thumb-btn{
+                        margin-top: 1.2rem;
+                    }
+                }
+
+                .date-box{
+                    margin-bottom: 2rem;
+                }
+
+                .proj-mem-box{
+                    margin-bottom: 2rem;
+
+                    .proj-mem{
+                        font-size: 16px;
+                        font-weight: normal;
+                        padding: 10px;
+                        margin-right: 10px;
+                        margin-bottom: 10px;
+                    }
+                }
+
+                .task-box{
+                    margin-bottom: 2rem;
+
+                    .task-container{
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                    }
+                }
                 
                 .input{
                     margin-bottom: 2rem;
 
                     .input-field{
-                        width: 700px;
+                        width: 100%;
+                    }
+
+                    .auto-comp-container{
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+
+                        .auto-comp{
+                            width: 100%;
+                        }
                     }
                 }
 
@@ -32,6 +83,8 @@
 
                 div{
                     .task-list{
+                        padding: 10px 60px 10px 40px;
+
                         .todo-tasks{
                             .task-box{
                                 display: flex;
