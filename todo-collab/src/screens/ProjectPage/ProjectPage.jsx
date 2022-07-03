@@ -385,13 +385,13 @@ function ProjectPage() {
                             </div>
 
                             <div className='proj-thumb-box'>
-                                {
+                                {/* {
                                     localThumbUrl &&
                                     <p>Project Thumbnail</p>
-                                }
+                                } */}
                                 {
                                     localThumbUrl &&
-                                    <img src={localThumbUrl} alt="thumbnail" className='img-fluid' />
+                                    <img src={localThumbUrl} alt="thumbnail" className='img-fluid thumbnail-img' />
                                 }
                                 <div className='edit-thumb-btn'>
                                     <Button
