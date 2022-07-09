@@ -16,7 +16,7 @@ function Chats() {
         <SideNav tab='Chats'>
             <div className='chats'>
                 <div className='chats-container container'>
-                    <h1>Messages</h1>
+                    <p className='inbox-header'>Inbox</p>
                     <Messenger />
                 </div>
             </div>

@@ -1,5 +1,5 @@
 .chat-full-container{
-    margin-top: 2rem;
+    // margin-top: 2rem;
 }
 
 .messenger-header{
@@ -12,9 +12,11 @@
 }
 
 .users-container{
-    padding-left: 7px;
-    padding-right: 7px;
+    // padding-left: 7px;
+    // padding-right: 7px;
+    padding: 7px 12px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.123);
+    border-radius: 16px;
 }
 
 .users-box{
@@ -37,7 +39,25 @@
     // border-left: 1px solid black;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.123);
     padding: 0px;
+    border-radius: 16px;
 }
+
+.current-chat-header{
+    padding: 1.5rem;
+    display: flex;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.048);
+}
+.current-chat-avatar{
+    align-items: center;
+    margin-right: 10px;
+    color: gray;
+}
+.current-chat-name{
+    font-size: 1rem;
+    font-weight: bolder;
+    align-items: center;
+}
+
 .display-chats{
     height: 65vh;
     overflow-y: scroll;
@@ -101,14 +121,18 @@
 }
 
 .send-message-container{
+    // box-shadow: 0px -10px 10px rgba(0, 0, 0, 0.048);
+    background-color: rgba(243, 242, 242, 0.37);
+    padding: 5px 10px 20px 10px;
 }
 .send-message{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    border: 1px solid rgba(223, 223, 223, 0.384);
-    padding: 10px;
+    border: 1px solid rgb(191, 191, 191);
+    border-radius: 16px;
+    padding: 0 10px;
 }
 .message-textbox{
     width: 90%;
@@ -116,9 +140,13 @@
     outline: none;
     resize: none;
     overflow: hidden;
+    background-color: transparent;
+}
+.message-textbox:focus > .send-message{
+    border: 1px solid rgb(117, 182, 255);
 }
 .message-textbox::placeholder{
-    font-size: 1.1rem;
+    font-size: 14px;
     color: rgb(189, 189, 189);
 }
 

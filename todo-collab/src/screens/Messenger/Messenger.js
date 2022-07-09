@@ -14,6 +14,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import SendIcon from '@material-ui/icons/Send';
 import { IconButton } from '@material-ui/core';
+import SmsIcon from '@material-ui/icons/Sms';
 
 const DisplayProfile = () => {
     return(
@@ -95,6 +96,7 @@ export default function Messenger(){
 
     useEffect(()=>{
         const getMessages = async() => {
+            console.log('this is convo id', currentChat?._id);
             try {
                 const res = await axios.get('http://localhost:8080/api/messages/'+currentChat?._id, {
                     headers: {
@@ -157,7 +159,7 @@ export default function Messenger(){
     return(
         <div className='chat-full-container'>
             <div className='row'>
-                <div className='col-lg-5'>
+                <div className='col-lg-4'>
                     <div className='users-container'>
                         <List>
                         {
@@ -173,9 +175,17 @@ export default function Messenger(){
                         </List>
                     </div>
                 </div>
-                <div className='col-lg-7 display-chat-container' style={{display: currentChat ? '' : 'none'}}>
+                <div className='col-lg-8 display-chat-container' style={{display: currentChat ? '' : 'none'}}>
                     {
                         currentChat && <>
+                        <div className='current-chat-header'>
+                            <div className='current-chat-avatar'>
+                                <SmsIcon />
+                            </div>
+                            <div className='current-chat-name'>
+                                {currentChat.project.project_name}
+                            </div>
+                        </div>
                         <div className='display-chats'>
                             {
                                 messages.map((m, index)=>{
@@ -185,7 +195,7 @@ export default function Messenger(){
                         </div>
                         <div className='send-message-container'>
                             <div className='send-message'>
-                                <textarea className='message-textbox' placeholder='Enter your message....' value={newMessage} onChange={(e)=>setNewMessage(e.target.value)} />
+                                <input className='message-textbox' placeholder='Enter your message....' value={newMessage} onChange={(e)=>setNewMessage(e.target.value)} />
                                 <IconButton onClick={handleMessageSubmit} disabled={!newMessage}>
                                     <SendIcon />
                                 </IconButton>

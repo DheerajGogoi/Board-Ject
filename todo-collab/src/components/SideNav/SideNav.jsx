@@ -169,6 +169,7 @@ function SideNav(props) {
             <div className={classes.toolbar} />
             <div>
                 <center>
+                    <h3><b>Board-Ject</b></h3>
                     <div className={classes.avatar}>
                         <img className='img-fluid' alt={user_cred.displayName} src={user_cred.profile ? user_cred.profile : 'aaa'} style={{width: '200px', height: 'auto'}} />
                     </div>

@@ -25,15 +25,15 @@ export default function Conversation({ conversation, currentUser, index }){
             // border: '1px solid black',
             // borderBottom: index !== 0 ? '1px solid black' : '',
             // borderBottom: index !== 0 ? '1px solid black' : '',
-            borderBottom: '1px solid grey',
+            // borderBottom: '1px solid grey',
         }}>
             <div>
                 <div><ListItemText>{conversation.project.project_name}</ListItemText></div>
-                <div style={{fontSize: '12px'}}>
+                <div>
                     {
                         conversation.members.map((member, index) => {
                             if(member !== currentUser.email) {
-                                return <span>{member} </span>
+                                return <span className='member-email'>{member}</span>
                             }
                         })
                     }
