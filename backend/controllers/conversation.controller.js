@@ -40,3 +40,20 @@ exports.find_conversation_uid = (req, res) => {
         }
     })
 }
+
+exports.update_conversation_members = (req, res) => {
+    db_connect.connect(async () => {
+        try {
+            const updatedConversation = await Conversation.updateOne({ "project.project_id": req.body.proj_id }, {
+                members: req.body.proj_members
+            }, {new: true});
+            !updatedConversation && res.status(200).json(updatedConversation);
+
+            res.status(200).json(updatedConversation);
+
+            mongoose.connection.close();
+        } catch (error) {
+            res.status(500).json(error)
+        }
+    })
+}

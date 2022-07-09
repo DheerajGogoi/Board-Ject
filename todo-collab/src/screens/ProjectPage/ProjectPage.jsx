@@ -24,6 +24,7 @@ import Modal from '@material-ui/core/Modal';
 import Fade from '@material-ui/core/Fade';
 import SideNav from '../../components/SideNav/SideNav';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import { ApiRoute } from '../../Util';
 
 const emails = [
     {title: 'dheeraj@gmail.com', id: 1},
@@ -125,6 +126,9 @@ function ProjectPage() {
     const [projMembers, setProjMembers] = useState([
         'dheeraj@gmail.com'
     ]);
+    const [projOldMembers, setProjOldMembers] = useState([
+        'dheeraj@gmail.com'
+    ]);
 
     const [memberEmail, setMemberEmail] = useState('');
 
@@ -151,6 +155,7 @@ function ProjectPage() {
                 setSelectThumbUrl(response.thumbnail);
                 setThumbName(response.thumbnailName);
                 setProjMembers(response.members);
+                setProjOldMembers(response.members);
                 console.log('project members', response.members);
                 // setProjTodo(response.todos);
                 setLocalTodo(response.todos[0].localTodo);
@@ -166,15 +171,16 @@ function ProjectPage() {
         fetchData();
     }, [])
 
-    // console.log('Project', {
-    //     projTitle: projTitle,
-    //     projDesc: projDesc,
-    //     projStatus: projStatus,
-    //     projDue: projDue,
-    //     projThumbUrl: projThumbUrl,
-    //     projMembers: projMembers,
-    //     projTodo: projTodo,
-    // });
+    const checkIfMemberChanged = (oldMem, newMem) => {
+        if (oldMem === newMem) return false; //no change
+        if (oldMem == null || newMem == null) return false; //no change
+        if (oldMem.length !== newMem.length) return true; //length chnaged ==> there is a change
+
+        for (var i = 0; i < oldMem.length; ++i) {
+            if (oldMem[i] !== newMem[i]) return true //elements not equal ==> there is a change
+        }
+        return false; //nothing else => no change
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -218,6 +224,27 @@ function ProjectPage() {
                 // setProjTodo(response.todos);
                 setLocalTodo(response.todos[0].localTodo);
                 setLocalComp(response.todos[0].localComp);
+
+                //checking if project members changed---
+                console.log('Did project members changed?', checkIfMemberChanged(projOldMembers.sort(), projMembers.sort()));
+                if(checkIfMemberChanged(projOldMembers.sort(), projMembers.sort())) {
+                    axios.put(ApiRoute('/api/conversation/update/conversation'), {
+                        proj_id: response._id,
+                        proj_members: response.members
+                    }, {
+                        headers: {
+                            'x-access-token': JSON.parse(localStorage.getItem("userJWT")).token
+                        }
+                    })
+                    .then(result => {
+                        console.log('This is the updated convo', result);
+                    })
+                    .catch(e => {
+                        console.log(e);
+                    })
+                }
+
+                setProjOldMembers(response.members);
 
                 setChangeVal(false);
                 setSnackOpen(true);
@@ -285,6 +312,27 @@ function ProjectPage() {
                             // setProjTodo(response.todos);
                             setLocalTodo(response.todos[0].localTodo);
                             setLocalComp(response.todos[0].localComp);
+                            
+                            //checking if project members changed---
+                            console.log('Did project members changed?', checkIfMemberChanged(projOldMembers.sort(), projMembers.sort()));
+                            if(checkIfMemberChanged(projOldMembers.sort(), projMembers.sort())) {
+                                axios.put(ApiRoute('/api/conversation/update/conversation'), {
+                                    proj_id: response._id,
+                                    proj_members: response.members
+                                }, {
+                                    headers: {
+                                        'x-access-token': JSON.parse(localStorage.getItem("userJWT")).token
+                                    }
+                                })
+                                .then(result => {
+                                    console.log('This is the updated convo', result);
+                                })
+                                .catch(e => {
+                                    console.log(e);
+                                })
+                            }
+
+                            setProjOldMembers(response.members);
 
                             setChangeVal(false);
                             setSnackOpen(true);

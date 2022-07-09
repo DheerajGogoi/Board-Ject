@@ -70,7 +70,7 @@ exports.update_project = (req, res) => {
                 todos: req.body.todos
             }, {new: true});
             !updatedProject && res.status(200).json(updatedProject);
-    
+
             res.status(200).json(updatedProject);
 
             mongoose.connection.close();
