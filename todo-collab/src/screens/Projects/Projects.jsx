@@ -106,13 +106,6 @@ function Projects() {
                 setDialogOpen(false);
                 setIsDeleting(false);
             })
-            // {
-            //     proj_id: projDelete._id
-            // }, {
-            //     headers: {
-            //         'x-access-token': JSON.parse(localStorage.getItem("userJWT")).token
-            //     }
-            // })
         } else {
             var desertRef = storage.ref().child('images/'+projDelete.thumbnailName);
             // Delete the file
@@ -129,10 +122,22 @@ function Projects() {
                         // console.log('My projects after deletion', result);
 
                         setNewProj(result.filter((item) => item.status === 'No-Status'));
-
                         setPendingProj(result.filter((item) => item.status === 'In Progress'))
-
                         setCompletedProj(result.filter((item) => item.status === 'Completed'))
+                    })
+                    .then(() => {
+                        //deleting the conversation and the messages of the Project
+                        axios.delete(ApiRoute('/api/conversation/delete/conversation'), {
+                            headers: {
+                                'x-access-token': JSON.parse(localStorage.getItem("userJWT")).token
+                            },
+                            data: {
+                                proj_id: projDelete._id
+                            }
+                        }) 
+                        .then((resp) => {
+                            console.log(resp);
+                        })
                     })
                     .catch((e)=>{
                         console.log(e.message);
