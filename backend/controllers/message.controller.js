@@ -33,3 +33,22 @@ exports.get_all_messages = (req, res) => {
         }
     })
 }
+
+//_id of Conversaton in the convosersationId of Message
+exports.delete_message = (req, res) => {
+    db_connect.connect(async () => {
+        try {
+            const deletedMessage = await Message.find({
+                conversationId: req.body.convo_id
+            })
+            if (!deletedMessage) {
+                return res.status(404).send();
+            }
+
+            res.status(200).json(deletedMessage);
+            mongoose.connection.close();
+        } catch (error) {
+            res.status(500).json(error)
+        }
+    })
+}

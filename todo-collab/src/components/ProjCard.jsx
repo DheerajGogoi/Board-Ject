@@ -12,6 +12,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
+import { ApiRoute } from '../Util';
 
 export default function ProjCard({ id, name, desc, status, memebers, due, thumbnail, todos, handleModalOpen, deleteProjectHandler, handleDialogOpen, setProjDelete, item, setNewProj, setPendingProj, setCompletedProj, setIsLoading }) {
     const user_cred = useSelector(state => state.auth.currentUser);
@@ -29,7 +30,7 @@ export default function ProjCard({ id, name, desc, status, memebers, due, thumbn
         setProjStatus(event.target.value);
         const my_project = {...item, status: new_status};
 
-        axios.put("http://localhost:8080/project/update/project", my_project, {
+        axios.put(ApiRoute("/project/update/project"), my_project, {
             headers: {
                 'x-access-token': JSON.parse(localStorage.getItem("userJWT")).token
             }
@@ -38,7 +39,7 @@ export default function ProjCard({ id, name, desc, status, memebers, due, thumbn
                 let response = result.data;
 
                 setIsLoading(true);
-                axios.get(`http://localhost:8080/project/all/${user_cred.email}`, {
+                axios.get(ApiRoute(`/project/all/${user_cred.email}`), {
                     headers: {
                         'x-access-token': JSON.parse(localStorage.getItem("userJWT")).token
                     }

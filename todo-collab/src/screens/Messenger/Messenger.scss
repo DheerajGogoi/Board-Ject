@@ -45,6 +45,7 @@
 .current-chat-header{
     padding: 1.5rem;
     display: flex;
+    flex-direction: row;
     box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.048);
 }
 .current-chat-avatar{

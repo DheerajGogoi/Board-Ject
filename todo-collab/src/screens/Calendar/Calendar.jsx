@@ -9,6 +9,7 @@ import { DataManager, WebApiAdaptor } from '@syncfusion/ej2-data';
 import axios from 'axios';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import SideNav from '../../components/SideNav/SideNav';
+import { ApiRoute } from '../../Util'
 
 function Calendar() {
     const dispatch = useDispatch();
@@ -21,7 +22,7 @@ function Calendar() {
         const getResult = async () => {
             setIsLoading(true);
             try {
-                const projects = await axios.get('http://localhost:8080/project/get_projects/'+user_cred.email, {
+                const projects = await axios.get(ApiRoute('/project/get_projects/'+user_cred.email), {
                     headers: {
                         'x-access-token': JSON.parse(localStorage.getItem("userJWT")).token
                     }

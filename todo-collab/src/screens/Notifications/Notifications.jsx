@@ -93,7 +93,7 @@ export default function Notifications() {
             })
 
             try {
-                const res = await axios.post('http://localhost:8080/api/notifications/add', notification, {
+                const res = await axios.post(ApiRoute('/api/notifications/add'), notification, {
                     headers: {
                         'x-access-token': JSON.parse(localStorage.getItem("userJWT")).token
                     }

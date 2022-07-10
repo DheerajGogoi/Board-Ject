@@ -15,6 +15,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import SendIcon from '@material-ui/icons/Send';
 import { IconButton } from '@material-ui/core';
 import SmsIcon from '@material-ui/icons/Sms';
+import AccountTreeIcon from '@material-ui/icons/AccountTree';
 
 const DisplayProfile = () => {
     return(
@@ -98,7 +99,7 @@ export default function Messenger(){
         const getMessages = async() => {
             console.log('this is convo id', currentChat?._id);
             try {
-                const res = await axios.get('http://localhost:8080/api/messages/'+currentChat?._id, {
+                const res = await axios.get(ApiRoute('/api/messages/'+currentChat?._id), {
                     headers: {
                         'x-access-token': JSON.parse(localStorage.getItem("userJWT")).token
                     }
@@ -133,7 +134,7 @@ export default function Messenger(){
             })
 
             try {
-                const res = await axios.post('http://localhost:8080/api/messages/add', message, {
+                const res = await axios.post(ApiRoute('/api/messages/add'), message, {
                     headers: {
                         'x-access-token': JSON.parse(localStorage.getItem("userJWT")).token
                     }
@@ -180,7 +181,9 @@ export default function Messenger(){
                         currentChat && <>
                         <div className='current-chat-header'>
                             <div className='current-chat-avatar'>
-                                <SmsIcon />
+                                <IconButton onClick={() => {}}>
+                                    <AccountTreeIcon />
+                                </IconButton>
                             </div>
                             <div className='current-chat-name'>
                                 {currentChat.project.project_name}

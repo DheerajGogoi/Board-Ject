@@ -1,4 +1,5 @@
 const Conversation  = require('../models/conversation.model');
+const Message = require('../models/message.model');
 const mongoose = require('mongoose');
 const db_connect = require('../utils/db_connect');
 const { body, validationResult } = require('express-validator');
@@ -55,5 +56,29 @@ exports.update_conversation_members = (req, res) => {
         } catch (error) {
             res.status(500).json(error)
         }
+    })
+}
+
+exports.delete_conversation = (req, res) => {
+    db_connect.connect(async () => {
+        Conversation.findOne({ "project.project_id": req.body.proj_id })
+        .then(result => {
+            console.log(result);
+            Conversation.findByIdAndDelete(result._id)
+            .then(() => {
+                console.log("Conversation Deleted");
+                Message.deleteMany({ conversationId: result._id })
+                .then(() => {
+                    console.log("All Messages deleted");
+                    res.status(200).json({success: true, message: "Data deleted successfully"});
+                })
+                .finally(() => {
+                    mongoose.connection.close();
+                })
+            })
+        })
+        .catch(error => {
+            res.status(500).json(error);
+        })
     })
 }

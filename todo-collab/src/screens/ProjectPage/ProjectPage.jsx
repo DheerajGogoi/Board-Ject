@@ -135,7 +135,7 @@ function ProjectPage() {
     useEffect(()=>{
         setIsLoading(true);
         const fetchData = () => {
-            axios.get(`http://localhost:8080/project/find-project/${params.id}`, {
+            axios.get(ApiRoute(`/project/find-project/${params.id}`), {
                 headers: {
                     'x-access-token': JSON.parse(localStorage.getItem("userJWT")).token
                 }
@@ -205,7 +205,7 @@ function ProjectPage() {
             };
 
             console.log('Project To update', updateProj);
-            axios.put("http://localhost:8080/project/update/project", updateProj, {
+            axios.put(ApiRoute("/project/update/project"), updateProj, {
                 headers: {
                     'x-access-token': JSON.parse(localStorage.getItem("userJWT")).token
                 }
@@ -292,7 +292,7 @@ function ProjectPage() {
                             }],
                         };
 
-                        axios.put("http://localhost:8080/project/update/project", updateProj, {
+                        axios.put(ApiRoute("/project/update/project"), updateProj, {
                             headers: {
                                 'x-access-token': JSON.parse(localStorage.getItem("userJWT")).token
                             }

@@ -71,7 +71,7 @@ function Projects() {
         // console.log('Project to be deleted', projDelete);
         setIsDeleting(true);
         if(projDelete.thumbnail === ''){
-            axios.delete(`http://localhost:8080/project/delete/project/${projDelete._id}`, {
+            axios.delete(ApiRoute(`/project/delete/project/${projDelete._id}`), {
                 headers: {
                     'x-access-token': JSON.parse(localStorage.getItem("userJWT")).token
                 }
@@ -81,10 +81,22 @@ function Projects() {
                 // console.log('My projects after deletion', result);
 
                 setNewProj(result.filter((item) => item.status === 'No-Status'));
-
                 setPendingProj(result.filter((item) => item.status === 'In Progress'))
-
-                setCompletedProj(result.filter((item) => item.status === 'Completed'))
+                setCompletedProj(result.filter((item) => item.status === 'Completed'));
+            })
+            .then(() => {
+                //deleting the conversation and the messages of the Project
+                axios.delete(ApiRoute('/api/conversation/delete/conversation'), {
+                    headers: {
+                        'x-access-token': JSON.parse(localStorage.getItem("userJWT")).token
+                    },
+                    data: {
+                        proj_id: projDelete._id
+                    }
+                }) 
+                .then((resp) => {
+                    console.log(resp);
+                })
             })
             .catch((e)=>{
                 console.log(e.message);
@@ -94,13 +106,20 @@ function Projects() {
                 setDialogOpen(false);
                 setIsDeleting(false);
             })
+            // {
+            //     proj_id: projDelete._id
+            // }, {
+            //     headers: {
+            //         'x-access-token': JSON.parse(localStorage.getItem("userJWT")).token
+            //     }
+            // })
         } else {
             var desertRef = storage.ref().child('images/'+projDelete.thumbnailName);
             // Delete the file
             desertRef.delete().then(() => {
                 console.log('Thumnail Deleted!');
                 
-                axios.delete(`http://localhost:8080/project/delete/project/${projDelete._id}`, {
+                axios.delete(ApiRoute(`/project/delete/project/${projDelete._id}`), {
                     headers: {
                         'x-access-token': JSON.parse(localStorage.getItem("userJWT")).token
                     }
@@ -136,7 +155,7 @@ function Projects() {
     useEffect(()=>{
         const fetchData = () => {
             setIsLoading(true);
-            axios.get(`http://localhost:8080/project/all/${user_cred.email}`, {
+            axios.get(ApiRoute(`/project/all/${user_cred.email}`), {
                 headers: {
                     'x-access-token': JSON.parse(localStorage.getItem("userJWT")).token
                 }
@@ -211,7 +230,7 @@ function Projects() {
                     localComp: []
                 }]
             }
-            axios.post('http://localhost:8080/project/add', newProj, {
+            axios.post(ApiRoute('/project/add'), newProj, {
                 headers: {
                     'x-access-token': JSON.parse(localStorage.getItem("userJWT")).token
                 }
@@ -232,17 +251,18 @@ function Projects() {
                             project_name: result.data.name
                         }
                     }
-                    axios.post('http://localhost:8080/api/conversation/add', conv, {
+
+                    axios.post(ApiRoute('/api/conversation/add'), conv, {
                         headers: {
                             'x-access-token': JSON.parse(localStorage.getItem("userJWT")).token
                         }
                     })
-                        .then(res => {
-                            console.log('conversation added!!', res.data);
-                        })
-                        .catch((e)=>{
-                            console.log(e.message);
-                        })
+                    .then(res => {
+                        console.log('conversation added!!', res.data);
+                    })
+                    .catch((e)=>{
+                        console.log(e.message);
+                    })
                 })
                 .catch((e)=>{
                     console.log(e.message);
@@ -288,7 +308,7 @@ function Projects() {
                             }]
                         }
 
-                        axios.post('http://localhost:8080/project/add', newProj, {
+                        axios.post(ApiRoute('/project/add'), newProj, {
                             headers: {
                                 'x-access-token': JSON.parse(localStorage.getItem("userJWT")).token
                             }
@@ -310,7 +330,7 @@ function Projects() {
                                         project_name: result.data.name
                                     }
                                 }
-                                axios.post('http://localhost:8080/api/conversation/add', conv, {
+                                axios.post(ApiRoute('/api/conversation/add'), conv, {
                                     headers: {
                                         'x-access-token': JSON.parse(localStorage.getItem("userJWT")).token
                                     }
