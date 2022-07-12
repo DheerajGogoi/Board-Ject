@@ -1,4 +1,4 @@
-import './Notifications';
+import './Notifications.scss';
 import React, { useState, useEffect, useRef } from 'react';
 import SideNav from '../../components/SideNav/SideNav';
 import TextField from '@material-ui/core/TextField';
@@ -116,6 +116,8 @@ export default function Notifications() {
             <br />
             <br />
             <Button variant='contained' color='primary' onClick={handleNotificationSubmit}>Send</Button>
+            <br />
+            <br />
             <div>
                 {
                     allNotifications.map((value, index) => {

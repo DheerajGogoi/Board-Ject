@@ -269,6 +269,9 @@ function Projects() {
                         console.log(e.message);
                     })
                 })
+                .then(() => {
+                    console.log("Requests to be sent to project members!");
+                })
                 .catch((e)=>{
                     console.log(e.message);
                 })
