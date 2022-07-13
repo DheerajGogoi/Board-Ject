@@ -1,5 +1,6 @@
 const Notification  = require('../models/notification.model');
 const Project = require('../models/project.model');
+const Conversation  = require('../models/conversation.model');
 const mongoose = require('mongoose');
 const db_connect = require('../utils/db_connect');
 const { body, validationResult } = require('express-validator');
@@ -62,26 +63,32 @@ exports.send_user_notification = (req, res) => {
 
 exports.response_notificaton = (req, res) => {
     db_connect.connect(async () => {
-        console.log("Response", req.body);
+        // console.log("Response", req.body);
         Notification.findByIdAndUpdate(req.body.notif_id, {
             pending: false,
             accepted: req.body.accepted
         }, {new: true})
         .then((response) => {
-            console.log(response);
+            // console.log(response);
             if(req.body.accepted) {
                 Project.findById(response.proj_id)
                 .then(resp => {
-                    console.log(resp);
+                    // console.log(resp);
                     Project.findByIdAndUpdate(resp._id, {
                         members: [...resp.members, response.receiver]
                     }, { new: true })
                     .then(respo => {
-                        console.log("Success");
-                        res.status(200).json("Success");
-                    })
-                    .finally(() => {
-                        mongoose.connection.close();
+                        // console.log('updated project', respo)
+                        Conversation.findOneAndUpdate({ "project.project_id": respo._id.toString() }, {
+                            members: respo.members
+                        }, {new: true})
+                        .then((respe) => {
+                            console.log("Success", respe);
+                            res.status(200).json("Success");
+                        })
+                        .finally(() => {
+                            mongoose.connection.close();
+                        })
                     })
                 })
             } else {

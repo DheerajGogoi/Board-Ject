@@ -1,4 +1,6 @@
 const Project = require('../models/project.model');
+const Conversation  = require('../models/conversation.model');
+const Message = require('../models/message.model');
 const mongoose = require('mongoose');
 const db_connect = require('../utils/db_connect');
 const { body, validationResult } = require('express-validator');
@@ -119,7 +121,8 @@ exports.add_project = async (req, res) => {
                 due: req.body.due,
                 thumbnail: req.body.thumbnail,
                 thumbnailName: req.body.thumbnailName,
-                todos: req.body.todos
+                todos: req.body.todos,
+                project_admins: req.body.project_admins
             })
             const project = await newProject.save();
             res.status(200).json(project);
@@ -129,5 +132,33 @@ exports.add_project = async (req, res) => {
         } catch (error) {
             res.status(500).json(error);
         }
+    })
+}
+
+exports.remove_member = async (req, res) => {
+    db_connect.connect(async () => {
+        Project.findByIdAndUpdate(req.body.proj_id, {
+            members: req.body.members.filter(user => user !== req.body.email)
+        }, {new: true})
+        .then(result => {
+            // res.status(200).json(result);
+            console.log("Project Update", result);
+            Conversation.findOneAndUpdate({ "project.project_id": req.body.proj_id }, {
+                members: result.members
+            }, {new: true})
+            .then(response => {
+                console.log("Conversation Updated", response);
+                res.status(200).json(result);
+            })
+            .catch(e => {
+                res.status(500).json(e);
+            })
+            .finally(() => {
+                mongoose.connection.close();
+            })
+        })
+        .catch(error => {
+            res.status(500).json(error);
+        })
     })
 }

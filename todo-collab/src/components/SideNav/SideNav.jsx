@@ -116,6 +116,7 @@ function SideNav(props) {
         history.location.pathname === '/stats' ? 'Projects Stats' :
         history.location.pathname === '/calendar' ? 'Calendar' :
         history.location.pathname === '/account' ? 'My Account' :
+        history.location.pathname === '/notifications' ? 'Notifications' :
         history.location.pathname === '/settings' ? 'Settings' :
         history.location.pathname === '/add-friend' ? 'Add Friend' :
         'Projects'

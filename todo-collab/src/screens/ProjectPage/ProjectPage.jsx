@@ -32,13 +32,15 @@ const emails = [
     {title: 'suraj@gmail.com', id: 3},
     {title: 'rupkumargogoi7@gmail.com', id: 4},
     {title: 'csb20028@tezu.ac.in', id: 5},
-    {title: 'dheeraj@weadmit.com', id: 6}
+    {title: 'dheeraj@weadmit.com', id: 6},
+    {title: 'gogoi@gmail.com', id: 7}
 ];
 
 function ProjectPage() {
     const params = useParams();
     const history = useHistory();
     // console.log('Card id: ', params.id);
+    const user_cred = useSelector(state => state.auth.currentUser);
 
     const [isLoading, setIsLoading] = useState(false);
     const [changeVal, setChangeVal] = useState(false);
@@ -62,8 +64,10 @@ function ProjectPage() {
 
     const [task, setTask] = useState('');
     const [projTodo, setProjTodo] = useState([]);
-    const [localTodo, setLocalTodo] = useState([])
-    const [localComp, setLocalComp] = useState([])
+    const [localTodo, setLocalTodo] = useState([]);
+    const [localComp, setLocalComp] = useState([]);
+
+    const [projAdmins, setProjAdmins] = useState([])
 
     const addTaskHander = () => {
         if(task.trim() !== ''){
@@ -160,6 +164,7 @@ function ProjectPage() {
                 // setProjTodo(response.todos);
                 setLocalTodo(response.todos[0].localTodo);
                 setLocalComp(response.todos[0].localComp);
+                setProjAdmins(response.project_admins);
             })
             .catch(e => {
                 alert(e.message);
@@ -213,6 +218,7 @@ function ProjectPage() {
             .then(result => {
                 let response = result.data;
 
+                setProject(response);
                 setProjTitle(response.name);
                 setProjDesc(response.desc);
                 setProjStatus(response.status);
@@ -220,8 +226,8 @@ function ProjectPage() {
                 setProjThumbUrl(response.thumbnail);
                 setLocalThumbUrl(response.thumbnail);
                 setSelectThumbUrl(response.thumbnail);
-                setProjMembers(response.members);
-                // setProjTodo(response.todos);
+                // setProjMembers(response.members);
+                setProjTodo(response.todos);
                 setLocalTodo(response.todos[0].localTodo);
                 setLocalComp(response.todos[0].localComp);
 
@@ -300,6 +306,7 @@ function ProjectPage() {
                         .then(result => {
                             let response = result.data;
 
+                            setProject(response);
                             setProjTitle(response.name);
                             setProjDesc(response.desc);
                             setProjStatus(response.status);
@@ -393,6 +400,90 @@ function ProjectPage() {
 
     const handleNav = () => {
         history.goBack();
+    }
+
+    // for adding or removing members
+    const [addEmailModal, setAddEmailModal] = useState(false);
+    const handleEmailModalClose = () => {
+        setAddEmailModal(false);
+    }
+
+    const handleEmailModalOpen = () => {
+        setAddEmailModal(true);
+    }
+
+    const [emailSnackOpen, setEmailSnackOpen] = useState(false);
+
+    const handleEmailSnackClose = (event, reason) => {
+        if (reason === 'clickaway') return;
+        setEmailSnackOpen(false);
+    };
+
+    const handleSendInvite = () => {
+
+        const notifBody = {
+            sender: user_cred.email,
+            receiver: memberEmail,
+            notification: user_cred.displayName + " (" +user_cred.email + ") has invited you to project " + projTitle,
+            type: "request",
+            accepted: false,
+            pending: true,
+            proj_id: project._id,
+        }
+
+        axios.post(ApiRoute('/api/notifications/send/user/notification'), notifBody, {
+            headers: {
+                'x-access-token': JSON.parse(localStorage.getItem("userJWT")).token
+            }
+        })
+        .then(result => {
+            result = result.data;
+            console.log('Notification sent to ' + result.receiver);
+            setEmailSnackOpen(true);
+        })
+        .catch(e => {
+            console.log(e);
+        })
+    };
+
+    const handleRemoveMembers = (item) => {
+        // setProjMembers(projMembers.filter((email) => email !== item));
+        // setChangeVal(true);
+        const body = {
+            email: item,
+            proj_id: project._id,
+            members: project.members
+        }
+
+        // console.log(item, project);
+        axios.put(ApiRoute('/project/remove/member'), body, {
+            headers: {
+                'x-access-token': JSON.parse(localStorage.getItem("userJWT")).token
+            }
+        })
+        .then(result => {
+            let response = result.data;
+
+            setProject(response);
+            set_Id(response._id);
+            setProjTitle(response.name);
+            setProjDesc(response.desc);
+            setProjStatus(response.status);
+            setProjDue(response.due);
+            setProjThumbUrl(response.thumbnail);
+            setLocalThumbUrl(response.thumbnail);
+            setSelectThumbUrl(response.thumbnail);
+            setThumbName(response.thumbnailName);
+            setProjMembers(response.members);
+            setProjOldMembers(response.members);
+            setLocalTodo(response.todos[0].localTodo);
+            setLocalComp(response.todos[0].localComp);
+            setProjAdmins(response.project_admins);
+            
+        })
+        .catch(e => {
+            console.log(e);
+        })
     }
 
     return (
@@ -507,62 +598,25 @@ function ProjectPage() {
                                 </MuiPickersUtilsProvider>
                             </div>
 
-                            <div className='input'>
-                                
-                                <div className='auto-comp-container'>
-
-                                    <div className='auto-comp'>
-                                        <Autocomplete
-                                            id="combo-box-demo"
-                                            options={emails}
-                                            getOptionLabel={(option) => option.title}
-                                            renderInput={(params) => 
-                                                <TextField
-                                                {...params}
-                                                label="Email"
-                                                variant="outlined"
-                                                value={memberEmail}
-                                                />
-                                            }
-                                            onChange={e => {
-                                                console.log(e.target.innerHTML);
-                                                setMemberEmail(e.target.innerHTML);
-                                            }}
-                                        />
-                                    </div>
-
-                                    <div style={{
-                                        alignSelf: 'center'
-                                    }}>
-                                        <Button variant='contained' onClick={()=>{
-                                            if(memberEmail.trim() !== ''){
-                                                if(projMembers.includes(memberEmail)){
-                                                    alert('Member already added!!')
-                                                } else {
-                                                    setProjMembers(prev => [memberEmail, ...prev]);
-                                                    setMemberEmail('');
-                                                    setChangeVal(true);
-                                                }
-                                            }
-                                        }}>
-                                            <AddIcon />
-                                        </Button>
-                                    </div>
+                            {projAdmins.includes(user_cred.email) && <>
+                                <p><b>Add Project Members</b></p>
+                                <div className='input'>
+                                    <Button variant='contained' onClick={() => handleEmailModalOpen()}>
+                                        Add More Members
+                                    </Button>
                                 </div>
-                            </div>
+                            </>}
 
                             <div className='proj-mem-box'>
+                                <p><b>Project Members</b></p>
                                 {
                                     projMembers.map((item, index) => {
                                         return (
-                                            <span key={index} className="badge badge-secondary proj-mem">{item} <ClearIcon style={{
+                                            <span key={index} className="badge badge-secondary proj-mem">{item} {projAdmins.includes(user_cred.email) && <ClearIcon style={{
                                                 fontSize: '20px',
                                                 marginLeft: '10px',
                                                 cursor: 'pointer'
-                                            }} onClick={()=>{
-                                                setProjMembers(projMembers.filter((email) => email !== item));
-                                                setChangeVal(true);
-                                            }} /></span>
+                                            }} onClick={() => handleRemoveMembers(item)} />} </span>
                                         )
                                     })
                                 }
@@ -671,6 +725,15 @@ function ProjectPage() {
                                 }{
                                     !projUpdating && 'Save'
                                 }
+                            </Button>
+
+                            <br />
+
+                            <Button variant="contained" color="secondary" onClick={() => {
+                                handleRemoveMembers(user_cred.email);
+                                handleNav();
+                            }}>
+                                Leave Project
                             </Button>
 
                         </form>
@@ -798,9 +861,142 @@ function ProjectPage() {
                         </MuiAlert>
                     </Snackbar>
                 </>
+
+                {/* for adding or deleteing members */}
+                <>
+                    <Modal
+                        aria-labelledby="transition-modal-title"
+                        aria-describedby="transition-modal-description"
+                        style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                        }}
+                        open={addEmailModal}
+                        closeAfterTransition
+                        BackdropComponent={Backdrop}
+                        BackdropProps={{
+                            timeout: 200,
+                        }}
+                        onClose={handleEmailModalClose}
+                    >
+                        <Fade in={addEmailModal}>
+                            <div style={{
+                                backgroundColor: 'white',
+                                padding: '20px',
+                                width: '50%',
+                                height: '50%',
+                                border: '1px solid black',
+                                overflowY: 'scroll'
+                            }}>
+                                <div className='add-proj-box'>
+                                    <div style={{
+                                        alignSelf: 'center',
+                                        textAlign: 'center'
+                                    }}>
+                                        <p><b>Add Project Members</b></p>
+                                        <div className='input'>
+                                            <div className='auto-comp-container'>
+                                                <div className='auto-comp'>
+                                                    <Autocomplete
+                                                        id="combo-box-demo"
+                                                        options={emails}
+                                                        getOptionLabel={(option) => option.title}
+                                                        renderInput={(params) => 
+                                                            <TextField
+                                                            {...params}
+                                                            label="Email"
+                                                            variant="outlined"
+                                                            value={memberEmail}
+                                                            />
+                                                        }
+                                                        onChange={e => {
+                                                            setMemberEmail(e.target.innerHTML);
+                                                        }}
+                                                    />
+                                                </div>
+
+                                                <br />
+
+                                                <Button variant='contained' onClick={() => handleSendInvite()}>
+                                                    Send
+                                                </Button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <br />
+                                    <br />
+
+                                </div>
+                            </div>
+                        </Fade>
+                    </Modal>
+                </>
+                <>
+                    <Snackbar
+                        open={emailSnackOpen}
+                        autoHideDuration={6000}
+                        onClose={handleEmailSnackClose}
+                    >
+                        <MuiAlert
+                            onClose={handleEmailSnackClose}
+                            severity="success"
+                            variant="filled"
+                        >
+                            Request Sent!
+                        </MuiAlert>
+                    </Snackbar>
+                </>
+
+
             </div>
         </SideNav>
     )
 }
 
 export default ProjectPage
+
+
+
+// <div className='input'>
+//     <div className='auto-comp-container'>
+//         <div className='auto-comp'>
+//             <Autocomplete
+//                 id="combo-box-demo"
+//                 options={emails}
+//                 getOptionLabel={(option) => option.title}
+//                 renderInput={(params) => 
+//                     <TextField
+//                     {...params}
+//                     label="Email"
+//                     variant="outlined"
+//                     value={memberEmail}
+//                     />
+//                 }
+//                 onChange={e => {
+//                     console.log(e.target.innerHTML);
+//                     setMemberEmail(e.target.innerHTML);
+//                 }}
+//             />
+//         </div>
+
+//         <div style={{
+//             alignSelf: 'center'
+//         }}>
+//             <Button variant='contained' onClick={()=>{
+//                 if(memberEmail.trim() !== ''){
+//                     if(projMembers.includes(memberEmail)){
+//                         alert('Member already added!!')
+//                     } else {
+//                         setProjMembers(prev => [memberEmail, ...prev]);
+//                         setMemberEmail('');
+//                         setChangeVal(true);
+//                     }
+//                 }
+//             }}>
+//                 <AddIcon />
+//             </Button>
+//         </div>
+//     </div>
+// </div>

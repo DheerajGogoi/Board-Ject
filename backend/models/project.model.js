@@ -28,6 +28,9 @@ const projectSchema = new Schema({
     },
     todos: {
         type: Array
+    },
+    project_admins: {
+        type: Array
     }
 }, {timestamps: true});
 

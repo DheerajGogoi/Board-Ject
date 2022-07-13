@@ -233,7 +233,10 @@ function Projects() {
                 todos: [{
                     localTodo: [],
                     localComp: []
-                }]
+                }],
+                project_admins: [
+                    user_cred.email
+                ]
             }
             axios.post(ApiRoute('/project/add'), newProj, {
                 headers: {
@@ -268,9 +271,6 @@ function Projects() {
                     .catch((e)=>{
                         console.log(e.message);
                     })
-                })
-                .then(() => {
-                    console.log("Requests to be sent to project members!");
                 })
                 .catch((e)=>{
                     console.log(e.message);
