@@ -14,7 +14,7 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { ApiRoute } from '../Util';
 
-export default function ProjCard({ id, name, desc, status, memebers, due, thumbnail, todos, handleModalOpen, deleteProjectHandler, handleDialogOpen, setProjDelete, item, setNewProj, setPendingProj, setCompletedProj, setIsLoading }) {
+export default function ProjCard({ id, name, desc, status, memebers, due, thumbnail, todos, handleModalOpen, deleteProjectHandler, handleDialogOpen, setProjDelete, item, setNewProj, setPendingProj, setCompletedProj, setIsLoading, project_admins }) {
     const user_cred = useSelector(state => state.auth.currentUser);
     const hisory = useHistory();
 
@@ -104,14 +104,16 @@ export default function ProjCard({ id, name, desc, status, memebers, due, thumbn
                         <MenuItem value={'Completed'}>Completed</MenuItem>
                     </Select>
                 </FormControl>
-                <Button size="small" style={{
-                    textTransform: 'none',
-                    color: 'red'
-                }}
-                onClick={() => onClickDelete()}
-                >
-                    Delete Project
-                </Button>
+                {project_admins.includes(user_cred.email) && <>
+                    <Button size="small" style={{
+                        textTransform: 'none',
+                        color: 'red'
+                    }}
+                    onClick={() => onClickDelete()}
+                    >
+                        Delete Project
+                    </Button>
+                </>}
             </CardActions>
         </Card>
         </div>

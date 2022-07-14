@@ -426,6 +426,7 @@ function Projects() {
                                                 setPendingProj={setPendingProj}
                                                 setCompletedProj={setCompletedProj}
                                                 setIsLoading={setIsLoading}
+                                                project_admins={item.project_admins}
                                             />
                                         )
                                     })
@@ -474,6 +475,7 @@ function Projects() {
                                                 setPendingProj={setPendingProj}
                                                 setCompletedProj={setCompletedProj}
                                                 setIsLoading={setIsLoading}
+                                                project_admins={item.project_admins}
                                             />
                                         )
                                     })
@@ -522,6 +524,7 @@ function Projects() {
                                                 setPendingProj={setPendingProj}
                                                 setCompletedProj={setCompletedProj}
                                                 setIsLoading={setIsLoading}
+                                                project_admins={item.project_admins}
                                             />
                                         )
                                     })

@@ -16,6 +16,7 @@ import SendIcon from '@material-ui/icons/Send';
 import { IconButton } from '@material-ui/core';
 import SmsIcon from '@material-ui/icons/Sms';
 import AccountTreeIcon from '@material-ui/icons/AccountTree';
+import { useHistory } from 'react-router-dom';
 
 const DisplayProfile = () => {
     return(
@@ -41,6 +42,8 @@ export default function Messenger(){
 
     const [isLoading, setIsloading] = useState(false);
     const [error,setError] = useState();
+
+    const history = useHistory();
 
     useEffect(()=>{
         console.log('entered');
@@ -151,6 +154,25 @@ export default function Messenger(){
         scrollRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [messages]);
 
+    const goToProject = () => {
+        const body = {
+            proj_id: currentChat.project.project_id
+        }
+        axios.get(ApiRoute('/project/find/project/'+currentChat.project.project_id), {
+            headers: {
+                'x-access-token': JSON.parse(localStorage.getItem("userJWT")).token
+            }
+        })
+        .then(result => {
+            console.log(result);
+            result = result.data;
+            history.push(`/projects/${result.id}`);
+        })
+        .catch(error => {
+            console.log(error);
+        })
+    }
+
     // console.log('Messages', messages);
     if (isLoading) return <div><LinearProgress /></div>
     if (error) return <h1>Error!</h1>;
@@ -181,7 +203,7 @@ export default function Messenger(){
                         currentChat && <>
                         <div className='current-chat-header'>
                             <div className='current-chat-avatar'>
-                                <IconButton onClick={() => {}}>
+                                <IconButton onClick={goToProject}>
                                     <AccountTreeIcon />
                                 </IconButton>
                             </div>

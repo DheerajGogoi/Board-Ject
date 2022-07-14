@@ -58,6 +58,19 @@ exports.find_project_by_id = (req, res) => {
     })
 }
 
+exports.find_project = (req, res) => {
+    db_connect.connect(async () => {
+        try {
+            const project = await Project.findById(req.params.proj_id);
+            res.status(200).json(project);
+
+            mongoose.connection.close();
+        } catch (error) {
+            res.status(500).json(error);
+        }
+    })
+}
+
 exports.update_project = (req, res) => {
     db_connect.connect(async () => {
         try {

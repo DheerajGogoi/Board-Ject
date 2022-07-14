@@ -27,6 +27,8 @@ router.route('/add').post([
         .withMessage('Due date cannot be empty'),
 ], verifyToken, ProjectController.add_project);
 
+router.route('/find/project/:proj_id').get(verifyToken, ProjectController.find_project);
+
 router.route('/update/project').put(verifyToken, ProjectController.update_project);
 
 router.route('/remove/member').put(verifyToken, ProjectController.remove_member);

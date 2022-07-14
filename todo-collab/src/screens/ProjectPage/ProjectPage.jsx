@@ -231,27 +231,6 @@ function ProjectPage() {
                 setLocalTodo(response.todos[0].localTodo);
                 setLocalComp(response.todos[0].localComp);
 
-                //checking if project members changed---
-                console.log('Did project members changed?', checkIfMemberChanged(projOldMembers.sort(), projMembers.sort()));
-                if(checkIfMemberChanged(projOldMembers.sort(), projMembers.sort())) {
-                    axios.put(ApiRoute('/api/conversation/update/conversation'), {
-                        proj_id: response._id,
-                        proj_members: response.members
-                    }, {
-                        headers: {
-                            'x-access-token': JSON.parse(localStorage.getItem("userJWT")).token
-                        }
-                    })
-                    .then(result => {
-                        console.log('This is the updated convo', result);
-                    })
-                    .catch(e => {
-                        console.log(e);
-                    })
-                }
-
-                setProjOldMembers(response.members);
-
                 setChangeVal(false);
                 setSnackOpen(true);
 
@@ -319,27 +298,6 @@ function ProjectPage() {
                             // setProjTodo(response.todos);
                             setLocalTodo(response.todos[0].localTodo);
                             setLocalComp(response.todos[0].localComp);
-                            
-                            //checking if project members changed---
-                            console.log('Did project members changed?', checkIfMemberChanged(projOldMembers.sort(), projMembers.sort()));
-                            if(checkIfMemberChanged(projOldMembers.sort(), projMembers.sort())) {
-                                axios.put(ApiRoute('/api/conversation/update/conversation'), {
-                                    proj_id: response._id,
-                                    proj_members: response.members
-                                }, {
-                                    headers: {
-                                        'x-access-token': JSON.parse(localStorage.getItem("userJWT")).token
-                                    }
-                                })
-                                .then(result => {
-                                    console.log('This is the updated convo', result);
-                                })
-                                .catch(e => {
-                                    console.log(e);
-                                })
-                            }
-
-                            setProjOldMembers(response.members);
 
                             setChangeVal(false);
                             setSnackOpen(true);
@@ -417,6 +375,7 @@ function ProjectPage() {
     const handleEmailSnackClose = (event, reason) => {
         if (reason === 'clickaway') return;
         setEmailSnackOpen(false);
+        setAddEmailModal(false);
     };
 
     const handleSendInvite = () => {
@@ -599,10 +558,9 @@ function ProjectPage() {
                             </div>
 
                             {projAdmins.includes(user_cred.email) && <>
-                                <p><b>Add Project Members</b></p>
                                 <div className='input'>
-                                    <Button variant='contained' onClick={() => handleEmailModalOpen()}>
-                                        Add More Members
+                                    <Button className='add-more-btn' variant='contained' onClick={() => handleEmailModalOpen()}>
+                                        Add More Members to Project
                                     </Button>
                                 </div>
                             </>}

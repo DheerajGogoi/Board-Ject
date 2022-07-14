@@ -20,12 +20,7 @@ export default function Notifications() {
     const [isLoading, setIsLoading] = useState(false);
     const [respLoading, setRespLoading] = useState(false);
     const [allNotifications, setAllNotifications] = useState([]);
-    const [newNotification, setNewNotification] = useState('');
-    const [arrivalNotification, setArrivalNotification] = useState(null);
     const dispatch = useDispatch();
-
-    const socket = useRef()
-    const scrollRef = useRef();
 
     useEffect(() => {
         setIsLoading(true);
@@ -46,69 +41,6 @@ export default function Notifications() {
             setIsLoading(false);
         })
     }, [])
-
-    // useEffect(()=>{
-    //     console.log('entered');
-    //     socket.current = io('ws://localhost:8900');
-    //     console.log('socket.current', socket.current);
-    //     socket.current.on('getNotification', (data) => {
-    //         console.log('notification data', data);
-    //         console.log('arrival notification incoming',);
-    //         setArrivalNotification({
-    //             sender: data.user_email,
-    //             receiver: 'dheeraj@gmail.com',
-    //             notification: data.notification
-    //         });
-    //     });
-    // }, [])
-
-    // useEffect(()=>{
-    //     console.log('this is arrival notification', arrivalNotification)
-    //     arrivalNotification && arrivalNotification.receiver === 'dheeraj@gmail.com' &&
-    //     setAllNotifications((prev) => [arrivalNotification, ...prev])
-    // }, [arrivalNotification]);
-
-    // useEffect(()=>{
-    //     socket.current.emit('addUser', user_cred.email);
-    //     socket.current.on('getUsers', (users) => {
-    //         console.log('Users', users);
-    //     })
-    // }, [user_cred])
-
-    // console.log('Socket', socket);
-
-    // const handleNotificationSubmit = async() => {
-    //     if(newNotification !== '') {
-    //         const notification = {
-    //             sender: user_cred.email,
-    //             receiver: 'dheeraj@gmail.com',
-    //             notification: newNotification,
-    //         }
-
-    //         const receiver_email = 'dheeraj@gmail.com'
-
-    //         console.log('receiver email', receiver_email);
-
-    //         socket.current.emit('sendNotification', {
-    //             sender_email: user_cred.email,
-    //             receiver_email,
-    //             notification: newNotification,
-    //         })
-
-    //         try {
-    //             const res = await axios.post(ApiRoute('/api/notifications/add'), notification, {
-    //                 headers: {
-    //                     'x-access-token': JSON.parse(localStorage.getItem("userJWT")).token
-    //                 }
-    //             });
-    //             arrivalNotification && arrivalNotification.receiver === notification.receiver &&
-    //             setAllNotifications([...allNotifications, res.data]);
-    //             setNewNotification('')
-    //         } catch (error) {
-    //             console.log(error);
-    //         }
-    //     }
-    // }
 
     const handleAcceptInvite = (value) => {
         console.log("Invite accept", value);
