@@ -32,6 +32,21 @@ exports.find_project_by_email = (req, res) => {
     })
 }
 
+exports.get_proj_stats = (req, res) => {
+    db_connect.connect(async () => {
+        Project.find({ members: req.params.email }, 'due status createdAt updatedAt')
+        .then(result => {
+            res.status(200).json(result);
+        })
+        .catch(error => {
+            res.status(500).json(error);
+        })
+        .finally(() => {
+            mongoose.connection.close();
+        })
+    })
+}
+
 exports.find_project_due_by_email = (req, res) => {
     db_connect.connect(async ()=>{
         try {
@@ -154,7 +169,6 @@ exports.remove_member = async (req, res) => {
             members: req.body.members.filter(user => user !== req.body.email)
         }, {new: true})
         .then(result => {
-            // res.status(200).json(result);
             console.log("Project Update", result);
             Conversation.findOneAndUpdate({ "project.project_id": req.body.proj_id }, {
                 members: result.members
@@ -172,6 +186,44 @@ exports.remove_member = async (req, res) => {
         })
         .catch(error => {
             res.status(500).json(error);
+        })
+    })
+}
+
+exports.add_admin = async (req, res) => {
+    db_connect.connect(async () => {
+        Project.findByIdAndUpdate(req.body.proj_id, {
+            project_admins: [...req.body.current_admins, req.body.new_admin]
+        }, { new: true })
+        .then(result => {
+            console.log("New admin added!", result);
+            //add a notification
+            res.status(200).json(result);
+        })
+        .catch(error => {
+            res.status(500).json(error);
+        })
+        .finally(() => {
+            mongoose.connection.close();
+        })
+    })
+}
+
+exports.remove_admin = async (req, res) => {
+    db_connect.connect(async () => {
+        Project.findByIdAndUpdate(req.body.proj_id, {
+            project_admins: req.body.current_admins.filter(admin => admin !== req.body.to_remove)
+        }, { new: true })
+        .then(result => {
+            console.log("Admin Removed!", result);
+            //add a notification
+            res.status(200).json(result);
+        })
+        .catch(error => {
+            res.status(500).json(error);
+        })
+        .finally(() => {
+            mongoose.connection.close();
         })
     })
 }

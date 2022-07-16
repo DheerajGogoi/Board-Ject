@@ -313,7 +313,10 @@ function Projects() {
                             todos: [{
                                 localTodo: [],
                                 localComp: []
-                            }]
+                            }],
+                            project_admins: [
+                                user_cred.email
+                            ]
                         }
 
                         axios.post(ApiRoute('/project/add'), newProj, {

@@ -294,8 +294,8 @@ function ProjectPage() {
                             setLocalThumbUrl(response.thumbnail);
                             setSelectThumbUrl(response.thumbnail);
                             setThumbName(response.thumbnailName)
-                            setProjMembers(response.members);
-                            // setProjTodo(response.todos);
+                            // setProjMembers(response.members);
+                            setProjTodo(response.todos);
                             setLocalTodo(response.todos[0].localTodo);
                             setLocalComp(response.todos[0].localComp);
 

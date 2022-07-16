@@ -29,9 +29,15 @@ router.route('/add').post([
 
 router.route('/find/project/:proj_id').get(verifyToken, ProjectController.find_project);
 
+router.route('/get_projects_stats/:email').get(verifyToken, ProjectController.get_proj_stats);
+
 router.route('/update/project').put(verifyToken, ProjectController.update_project);
 
 router.route('/remove/member').put(verifyToken, ProjectController.remove_member);
+
+router.route('/add/admin').put(verifyToken, ProjectController.add_admin);
+
+router.route('/remove/admin').put(verifyToken, ProjectController.remove_admin);
 
 router.route('/delete/project/:id').delete(verifyToken, ProjectController.delete_project_by_id);
 
