@@ -585,12 +585,13 @@ function ProjectPage() {
                             }}>
                                 <p>Tasks</p>
                                 <div className='task-container'>
-                                    <div>
+                                    <div className='task-input'>
                                         <TextField
                                         variant='standard'
                                         value={task}
                                         onChange={e => setTask(e.target.value)}
                                         placeholder='Add task'
+                                        className='task-input-field'
                                         />
                                     </div>
 

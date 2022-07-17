@@ -11,7 +11,6 @@ import Badge from '@material-ui/core/Badge';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { ApiRoute } from '../../Util';
-import {io} from 'socket.io-client';
 import RequestNotif from './components/RequestNotif';
 import FeedbackNotif from './components/FeedbackNotif';
 
@@ -117,7 +116,7 @@ export default function Notifications() {
     return(
         <SideNav tab='Notifications'>
             {respLoading && <LinearProgress />}
-            <h1>Notifications</h1>
+            {/* <h1>Notifications</h1> */}
             <div>
                 {
                     allNotifications.map((value, index) => {

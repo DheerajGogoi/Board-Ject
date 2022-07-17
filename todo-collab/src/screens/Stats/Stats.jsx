@@ -274,6 +274,7 @@ function Stats() {
                                 <VictoryAxis
                                     tickValues={[1, 2, 3]}
                                     tickFormat={all_status}
+                                    style={{ tickLabels: { fontSize: 10 } }}
                                 />
                                 <VictoryAxis
                                     dependentAxis

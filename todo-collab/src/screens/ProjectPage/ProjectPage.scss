@@ -61,6 +61,14 @@
                         display: flex;
                         flex-direction: row;
                         justify-content: space-between;
+
+                        .task-input{
+                            width: 100%;
+
+                            .task-input-field{
+                                width: 100%;
+                            }
+                        }
                     }
                 }
                 
@@ -94,7 +102,7 @@
 
                 div{
                     .task-list{
-                        padding: 10px 60px 10px 40px;
+                        margin-top: 2rem;
 
                         .todo-tasks{
                             .task-box{
