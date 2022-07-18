@@ -92,6 +92,9 @@ const useStyles = makeStyles((theme) => ({
         color: 'grey',
         fontStyle: 'italic',
         fontSize: '14px'
+    },
+    notifPopOver: {
+        // maxWidth: '500px'
     }
 }));
 
@@ -136,11 +139,7 @@ function SideNav(props) {
     const id = open ? 'simple-popover' : undefined;
 
     const [allNotifications, setAllNotifications] = useState([]);
-    const [newNotification, setNewNotification] = useState('');
-    const [arrivalNotification, setArrivalNotification] = useState(null);
-    
-    const socket = useRef()
-    const scrollRef = useRef();
+    const [notifBadgeCount, setNotifBadgeCount] = useState(0);
 
     useEffect(() => {
         axios.get(ApiRoute('/api/notifications/'+user_cred.email), {
@@ -155,6 +154,16 @@ function SideNav(props) {
             dispatch(notifActions.setNotifications({
                 notifications: result
             }))
+            setNotifBadgeCount(0);
+            result.map((value, index) => {
+                const d1 = new Date();
+                const d2 = new Date(value.createdAt);
+                const time_dur = d1.getTime() - d2.getTime();
+                const date_dur = Math.round(time_dur / (1000 * 3600 * 24));
+                if(date_dur < 30){
+                    setNotifBadgeCount(prev => prev + 1);
+                }
+            })
         })
         .catch(e => {
             console.log(e.message);
@@ -163,7 +172,7 @@ function SideNav(props) {
         })
     }, [])
 
-    // console.log('Notifications', notifs);
+    // console.log('Notification Badge Count', notifBadgeCount);
 
     const drawer = (
         <div>
@@ -193,7 +202,15 @@ function SideNav(props) {
                                 <ListItemIcon>
                                     {icon}
                                 </ListItemIcon>
-                                <ListItemText primary={title} />
+                                {
+                                    title === "Notifications" && notifBadgeCount > 0 && <ListItemText primary={`${title} (${notifBadgeCount})`} />
+                                }
+                                {
+                                    title === "Notifications" && notifBadgeCount === 0 && <ListItemText primary={title} />
+                                }
+                                {
+                                    title !== "Notifications" && <ListItemText primary={title} />
+                                }
                             </ListItem>
                         </>
                     ))}
@@ -227,7 +244,7 @@ function SideNav(props) {
 
                     <div style={{ alignSelf: 'center' }}>
                         <IconButton aria-describedby={id} onClick={handleClick}>
-                            <Badge badgeContent={notifs.notifCount} color="primary">
+                            <Badge badgeContent={notifBadgeCount} color="primary">
                                 <NotificationsIcon className={classes.notifIcon} />
                             </Badge>
                         </IconButton>
@@ -244,6 +261,7 @@ function SideNav(props) {
                                 vertical: 'top',
                                 horizontal: 'right',
                             }}
+                            className={classes.notifPopOver}
                         >
                             <Typography className={classes.typography}>
                                 {
