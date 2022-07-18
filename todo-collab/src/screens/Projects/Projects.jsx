@@ -647,56 +647,6 @@ function Projects() {
 
                                         </div>
 
-                                        <div style={{
-                                            marginBottom: '2rem'
-                                        }}>
-                                            <TextField
-                                                id="standard-basic"
-                                                placeholder="Add other members through email"
-                                                value={memberEmail}
-                                                onChange={(e)=>setMemberEmail(e.target.value)}
-                                                style={{
-                                                    width: '480px'
-                                                }}
-                                            />
-
-                                            <IconButton onClick={()=>{
-                                                if(memberEmail.trim() !== ''){
-                                                    if(projMembers.includes(memberEmail)){
-                                                        alert('Member already added!!')
-                                                    } else {
-                                                        setProjMemberse(prev => [memberEmail, ...prev]);
-                                                        setMemberEmail('')
-                                                    }
-                                                }
-                                            }}>
-                                                <AddIcon />
-                                            </IconButton>
-                                        </div>
-
-                                        <div style={{
-                                            marginBottom: '2rem'
-                                        }}>
-                                            {
-                                                projMembers.map((item, index) => {
-                                                    return (
-                                                        <span key={index} className="badge badge-secondary" style={{
-                                                            fontSize: '16px',
-                                                            fontWeight: 'normal',
-                                                            padding: '10px',
-                                                            marginRight: '10px'
-                                                        }}>{item} <ClearIcon style={{
-                                                            fontSize: '20px',
-                                                            marginLeft: '10px',
-                                                            cursor: 'pointer'
-                                                        }} onClick={()=>{
-                                                            setProjMemberse(projMembers.filter((email) => email !== item));
-                                                        }} /></span>
-                                                    )
-                                                })
-                                            }
-                                        </div>
-
                                         <Button
                                         variant='outlined'
                                         type='submit'

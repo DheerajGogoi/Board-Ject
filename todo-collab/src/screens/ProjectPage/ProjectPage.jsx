@@ -376,13 +376,16 @@ function ProjectPage() {
         if (reason === 'clickaway') return;
         setEmailSnackOpen(false);
         setAddEmailModal(false);
+        setToSendEmail('')
     };
 
-    const handleSendInvite = () => {
+    const [toSendEmail, setToSendEmail] = useState('');
+    const handleSendInvite = (e) => {
+        e.preventDefault();
 
         const notifBody = {
             sender: user_cred.email,
-            receiver: memberEmail,
+            receiver: toSendEmail,
             notification: user_cred.displayName + " (" +user_cred.email + ") has invited you to project " + projTitle,
             type: "request",
             accepted: false,
@@ -566,10 +569,10 @@ function ProjectPage() {
                             </>}
 
                             <div className='proj-mem-box'>
-                                <p><b>Project Members</b></p>
+                                <p><b>Other Members</b></p>
                                 {
                                     projMembers.map((item, index) => {
-                                        return (
+                                        if(item !== user_cred.email) return (
                                             <span key={index} className="badge badge-secondary proj-mem">{item} {projAdmins.includes(user_cred.email) && <ClearIcon style={{
                                                 fontSize: '20px',
                                                 marginLeft: '10px',
@@ -854,7 +857,7 @@ function ProjectPage() {
                                         textAlign: 'center'
                                     }}>
                                         <p><b>Add Project Members</b></p>
-                                        <div className='input'>
+                                        {/* <div className='input'>
                                             <div className='auto-comp-container'>
                                                 <div className='auto-comp'>
                                                     <Autocomplete
@@ -881,6 +884,30 @@ function ProjectPage() {
                                                     Send
                                                 </Button>
                                             </div>
+                                        </div> */}
+
+                                        <div>
+                                            <form onSubmit={handleSendInvite}>
+                                                <div className='input'>
+                                                    <TextField
+                                                    multiline
+                                                    id="outlined-basic"
+                                                    variant="outlined"
+                                                    label='Email Address'
+                                                    value={toSendEmail}
+                                                    className='input-field'
+                                                    onChange={(e)=>{
+                                                        setToSendEmail(e.target.value);
+                                                    }}
+                                                    type='email'
+                                                    required
+                                                    />
+                                                </div>
+
+                                                <Button variant='contained' type='submit'>
+                                                    Send
+                                                </Button>
+                                            </form>
                                         </div>
                                     </div>
 
