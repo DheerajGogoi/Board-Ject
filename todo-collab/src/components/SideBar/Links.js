@@ -52,13 +52,6 @@ export const links = [
             <NotificationsIcon />
         </>
     },
-    // {
-    //     path: '/settings',
-    //     title: 'Settings',
-    //     icon: <>
-    //         <SettingsIcon />
-    //     </>
-    // },
     {
         path: '/',
         title: 'Log Out',

@@ -6,8 +6,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import { login_routes, general_routes } from './routes/routes';
 
-const SideBar = lazy(()=>import('./components/SideBar/SideBar'));
-
 function App() {
   const isLoggedIn = useSelector(state => state.auth.userLoggedIn);
 
@@ -30,7 +28,6 @@ function App() {
         </Router>
       ) : (
         <Router>
-          {/* <SideBar /> */}
           <Switch>
             {
               general_routes.map(({ path, component }, index) => {
