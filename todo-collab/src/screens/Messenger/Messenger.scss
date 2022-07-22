@@ -86,30 +86,49 @@
     display: flex;
     flex-direction: row;
 }
+
+.sender-email{
+    margin-left: 10px;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    font-style: italic;
+}
+
+.message-box.own .sender-email{
+    // margin-left: 10px;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    font-style: italic;
+    display: flex;
+    flex-direction: row-reverse;
+    margin-right: 1rem;
+}
+
 .message{
-    width: 50%;
+    // width: 50%;
     margin-left: 10px;
     background-color: aqua;
     padding: 10px;
     border-radius: 15px;
     border-top-left-radius: 0;
-    margin-top: 20px;
+    // margin-top: 20px;
 }
 .message-sent-time{
     margin-left: 55px;
-    margin-top: -16px;
+    // margin-top: -16px;
     text-align: left;
     font-size: 12px;
     color: gray;
 }
+
 .message-box.own .message{
-    width: 50%;
+    // width: 50%;
     margin-right: 10px;
     background-color: greenyellow;
     padding: 10px;
     border-radius: 13px;
     border-top-right-radius: 0;
-    margin-top: 20px;
+    // margin-top: 20px;
 }
 .message-box.own .avatar{
     display: flex;
@@ -117,7 +136,7 @@
 }
 .message-box.own .message-sent-time{
     margin-right: 55px;
-    margin-top: -16px;
+    // margin-top: 1rem;
     text-align: right;
 }
 
@@ -158,3 +177,5 @@
 .profile-header{
     text-align: center;
 }
+
+// for mobile view

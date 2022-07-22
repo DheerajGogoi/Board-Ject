@@ -1,10 +1,10 @@
-import './Messenger.scss'
+import './MobileMessenger.scss'
 import React, { useState, useEffect, useContext, useRef } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import axios from 'axios';
-import Conversation from './Conversation';
+import MConversation from './MConversation';
 import {format} from 'timeago.js'
-import DisplayChat from './DisplayChat';
+import MDisplayChat from './MDisplayChat';
 import {io} from 'socket.io-client'
 import { useSelector } from 'react-redux';
 import { ApiRoute } from '../../Util';
@@ -18,9 +18,10 @@ import SmsIcon from '@material-ui/icons/Sms';
 import AccountTreeIcon from '@material-ui/icons/AccountTree';
 import { useHistory } from 'react-router-dom';
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 require('dotenv').config();
 
-export default function Messenger(){
+export default function MobileMessenger(){
 
     const current_user = useSelector(state => state.auth.currentUser)
     const [conversation, setConversation] = useState([]);
@@ -164,6 +165,17 @@ export default function Messenger(){
         })
     }
 
+    const selectConvo = (item) => {
+        setCurrentChat(item);
+        document.getElementById('convo-window').style.display = 'none';
+        document.getElementById('chat-window').style.display = 'block';
+    }
+
+    const handleChatBack = () => {
+        document.getElementById('convo-window').style.display = 'block';
+        document.getElementById('chat-window').style.display = 'none';
+    }
+
     // console.log('Messages', messages);
     if (isLoading) return <div><LinearProgress /></div>
     if (error) return <h1>Error!</h1>;
@@ -171,57 +183,58 @@ export default function Messenger(){
     // console.log('Current chat', currentChat)
 
     return(
-        <div className='chat-full-container'>
-            <div className='row'>
-                <div className='col-lg-4'>
-                    <div className='users-container'>
-                        <List>
-                        {
-                            conversation.map((item, index)=>{
-                                if(item.members.length > 1)
-                                    return (
-                                        <div key={index} onClick={()=>setCurrentChat(item)}>
-                                            <Conversation conversation={item} currentUser={current_user} index={index} />
-                                        </div>
-                                    )
-                            })
-                        }
-                        </List>
-                    </div>
-                </div>
-                <div className='col-lg-8 display-chat-container' style={{display: currentChat ? '' : 'none'}}>
+        <div className='mobile-chat'>
+            <div className='users-list-view' id='convo-window'>
+                <List>
                     {
-                        currentChat && <>
-                        <div className='current-chat-header'>
+                        conversation.map((item, index)=>{
+                            if(item.members.length > 1)
+                                return (
+                                    <div key={index} onClick={() => selectConvo(item)}>
+                                        <MConversation conversation={item} currentUser={current_user} index={index} />
+                                    </div>
+                                )
+                        })
+                    }
+                </List>
+            </div>
+            {/* style={{display: currentChat ? '' : 'none'}} */}
+            <div id='chat-window' style={{display: 'none'}}>
+                {
+                    <>
+                        <div className='curr-chat-header'>
+                            <div>
+                                <IconButton onClick={handleChatBack} className='goback'>
+                                    <ArrowBackIcon />
+                                </IconButton>
+                            </div>
                             <div className='current-chat-avatar'>
                                 <IconButton onClick={goToProject}>
                                     <AccountTreeIcon />
                                 </IconButton>
                             </div>
-                            <div className='current-chat-name'>
-                                {currentChat.project.project_name}
+                            <div className='curr-chat-name'>
+                                {currentChat?.project.project_name}
                             </div>
                         </div>
-                        <div className='display-chats'>
+                        <div className='disp-chats'>
                             {
                                 messages.map((m, index)=>{
-                                    return <div key={index} ref={scrollRef}><DisplayChat sender={m.sender} message={m} own={m.sender === current_user.email}/></div>
+                                    return <div key={index} ref={scrollRef}><MDisplayChat sender={m.sender} message={m} own={m.sender === current_user.email}/></div>
                                 })
                             }
                         </div>
-                        <div className='send-message-container'>
-                            <div className='send-message'>
-                                <input className='message-textbox' placeholder='Enter your message....' value={newMessage} onChange={(e)=>setNewMessage(e.target.value)} />
+                        <div className='send-msg-container'>
+                            <div className='send-msg'>
+                                <input className='msg-textbox' placeholder='Enter your message....' value={newMessage} onChange={(e)=>setNewMessage(e.target.value)} />
                                 <IconButton onClick={handleMessageSubmit} disabled={!newMessage}>
                                     <SendIcon />
                                 </IconButton>
                             </div>
                         </div>
-                        </>
-                        
-                    }
+                    </>
                     
-                </div>
+                }
             </div>
         </div>
     );

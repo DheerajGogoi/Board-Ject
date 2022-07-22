@@ -1,0 +1,163 @@
+.mobile-chat{
+
+    .users-list-view{
+        margin-bottom: 20px;
+        text-align: center;
+        // padding: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.123);
+        transition: 0.3s ease;
+    }
+    
+    .chats-header{
+        text-align: center;
+    }
+
+    #chat-window{
+        // border-left: 1px solid black;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.123);
+        padding: 0px;
+
+        .curr-chat-header{
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: row;
+            box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.048);
+        }
+        .current-chat-avatar{
+            align-items: center;
+            margin-right: 10px;
+            color: gray;
+        }
+        .curr-chat-name{
+            font-size: 1rem;
+            font-weight: bolder;
+            align-self: center;
+        }
+        
+        .disp-chats{
+            height: 65vh;
+            overflow-y: scroll;
+            padding: 2%;
+            background-color: rgba(243, 242, 242, 0.37);
+        }
+        .disp-chats::-webkit-scrollbar {
+            width: 5px;
+            border-radius: 10px;
+        }
+        /* Track */
+        .disp-chats::-webkit-scrollbar-track {
+          background: transparent;
+        }
+          /* Handle */
+        .disp-chats::-webkit-scrollbar-thumb {
+            background: gray;
+        }
+        /* Handle on hover */
+        .disp-chats::-webkit-scrollbar-thumb:hover {
+            background: rgb(94, 94, 94)gray;
+        }
+        
+        .avatar{
+            display: flex;
+            flex-direction: row;
+        }
+        
+        .sender_email{
+            margin-left: 10px;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            font-style: italic;
+        }
+        
+        .message-box.own .sender_email{
+            // margin-left: 10px;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            font-style: italic;
+            display: flex;
+            flex-direction: row-reverse;
+            margin-right: 1rem;
+        }
+        
+        .message{
+            // width: 50%;
+            margin-left: 10px;
+            background-color: aqua;
+            padding: 10px;
+            border-radius: 15px;
+            border-top-left-radius: 0;
+            // margin-top: 20px;
+        }
+        .message-sent-time{
+            margin-left: 55px;
+            // margin-top: -16px;
+            text-align: left;
+            font-size: 12px;
+            color: gray;
+        }
+        
+        .message-box.own .message{
+            // width: 50%;
+            margin-right: 10px;
+            background-color: greenyellow;
+            padding: 10px;
+            border-radius: 13px;
+            border-top-right-radius: 0;
+            // margin-top: 20px;
+        }
+        .message-box.own .avatar{
+            display: flex;
+            flex-direction: row-reverse;
+        }
+        .message-box.own .message-sent-time{
+            margin-right: 55px;
+            // margin-top: 1rem;
+            text-align: right;
+        }
+        
+        .send-msg-container{
+            // box-shadow: 0px -10px 10px rgba(0, 0, 0, 0.048);
+            background-color: rgba(243, 242, 242, 0.37);
+            padding: 5px 10px 20px 10px;
+        }
+        .send-msg{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid rgb(191, 191, 191);
+            border-radius: 16px;
+            padding: 0 10px;
+        }
+        .msg-textbox{
+            width: 90%;
+            border: none;
+            outline: none;
+            resize: none;
+            overflow: hidden;
+            background-color: transparent;
+        }
+        .msg-textbox:focus > .send-msg{
+            border: 1px solid rgb(117, 182, 255);
+        }
+        .msg-textbox::placeholder{
+            font-size: 14px;
+            color: rgb(189, 189, 189);
+        }
+        
+        .send-msg-btn{
+            height: 30px;
+        }
+        
+        .profile-header{
+            text-align: center;
+        }
+
+        .goback{
+            background-color: rgb(241, 241, 241);
+            margin-right: 2rem;
+        }
+    }
+}
+
+// for mobile view
