@@ -18,7 +18,6 @@ const removeUser = (socketId) => {
 };
 
 const getUser = (sender_email) => {
-    // return users.find((user) => user.user_email === user_email);
     return users.filter((user) => user.user_email !== sender_email);
 };
 
