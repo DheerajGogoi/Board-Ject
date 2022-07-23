@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-// const bodyParser = require("body-parser");
 const projectRouter = require('./routes/project');
 const convRoute = require('./routes/conversations')
 const messageRoute = require('./routes/messages')
@@ -80,14 +79,8 @@ app.get('/activity',(req, res) => {
   });
 })
 
-// END POINTS START
+// END POINTS
 app.use('/project', projectRouter);
 app.use('/api/conversation', convRoute);
 app.use('/api/messages', messageRoute);
 app.use('/api/notifications', notificationsRoute);
-// END POINTS END
-
-// const port = process.env.PORT || 8080
-// app.listen(port, function () {
-//     console.log('Server is running at port '+port);
-// })
