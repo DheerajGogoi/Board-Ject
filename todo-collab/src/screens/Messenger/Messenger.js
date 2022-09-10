@@ -38,7 +38,9 @@ export default function Messenger(){
 
     useEffect(()=>{
         console.log('entered');
-        socket.current = io('ws://localhost:8900');
+        const socket_url = process.env.REACT_APP_SOCKET_URL;
+        console.log('Socket URL', socket_url);
+        socket.current = io(socket_url);
         console.log('socket.current', socket.current);
         socket.current.on('getMessage', (data) => {
             // console.log('message data',data);

@@ -117,7 +117,7 @@ export default function Notifications() {
         <SideNav tab='Notifications'>
             {respLoading && <LinearProgress />}
             {/* <h1>Notifications</h1> */}
-            <div>
+            <div className='notif-container'>
                 {
                     allNotifications.map((value, index) => {
                         if(value.type === 'request') {
