@@ -13,7 +13,7 @@ function Chats() {
     const dispatch = useDispatch();
     const user_cred = useSelector(state => state.auth.currentUser);
     // console.log('Current user credentials', user_cred);
-    console.log(isMobile)
+    // console.log(isMobile)
 
     return (
         <SideNav tab='Chats'>

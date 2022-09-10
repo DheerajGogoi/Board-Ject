@@ -95,7 +95,7 @@ function Projects() {
                     }
                 }) 
                 .then((resp) => {
-                    console.log(resp);
+                    // console.log(resp);
                 })
             })
             .catch((e)=>{
@@ -110,7 +110,7 @@ function Projects() {
             var desertRef = storage.ref().child('images/'+projDelete.thumbnailName);
             // Delete the file
             desertRef.delete().then(() => {
-                console.log('Thumnail Deleted!');
+                // console.log('Thumnail Deleted!');
                 
                 axios.delete(ApiRoute(`/project/delete/project/${projDelete._id}`), {
                     headers: {
@@ -136,7 +136,7 @@ function Projects() {
                             }
                         }) 
                         .then((resp) => {
-                            console.log(resp);
+                            // console.log(resp);
                         })
                     })
                     .catch((e)=>{
@@ -203,7 +203,7 @@ function Projects() {
             let reader = new FileReader();
             reader.onload = (e) => {
                 setLocalThumb(e.target.result);
-                console.log(e.target.result);
+                // console.log(e.target.result);
             };
             reader.readAsDataURL(event.target.files[0]);
         }
@@ -266,7 +266,7 @@ function Projects() {
                         }
                     })
                     .then(res => {
-                        console.log('conversation added!!', res.data);
+                        // console.log('conversation added!!', res.data);
                     })
                     .catch((e)=>{
                         console.log(e.message);
@@ -347,7 +347,7 @@ function Projects() {
                                     }
                                 })
                                     .then(res => {
-                                        console.log('conversation added!!', res.data);
+                                        // console.log('conversation added!!', res.data);
                                     })
                                     .catch((e)=>{
                                         console.log(e.message);

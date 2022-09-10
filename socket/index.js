@@ -1,4 +1,15 @@
+const express = require('express');
+const cors = require('cors');
+
 require('dotenv').config();
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+app.get("/", (req,res) => {
+    res.json(`Socket server runnig on port ${process.env.SOCKET}`);
+})
 
 const io = require('socket.io')(process.env.SOCKET, {
     cors: {

@@ -121,7 +121,7 @@ function ProjectPage() {
             reader.onload = (e) => {
                 // setLocalThumbUrl(e.target.result);
                 setSelectThumbUrl(e.target.result);
-                console.log(e.target.result);
+                // console.log(e.target.result);
             };
             reader.readAsDataURL(event.target.files[0]);
         }
@@ -146,7 +146,7 @@ function ProjectPage() {
             })
             .then((result)=>{
                 let response = result.data;
-                console.log('My project', response);
+                // console.log('My project', response);
                 setProject(response);
 
                 set_Id(response._id);
@@ -160,7 +160,7 @@ function ProjectPage() {
                 setThumbName(response.thumbnailName);
                 setProjMembers(response.members);
                 setProjOldMembers(response.members);
-                console.log('project members', response.members);
+                // console.log('project members', response.members);
                 // setProjTodo(response.todos);
                 setLocalTodo(response.todos[0].localTodo);
                 setLocalComp(response.todos[0].localComp);
@@ -209,7 +209,7 @@ function ProjectPage() {
                 }],
             };
 
-            console.log('Project To update', updateProj);
+            // console.log('Project To update', updateProj);
             axios.put(ApiRoute("/project/update/project"), updateProj, {
                 headers: {
                     'x-access-token': JSON.parse(localStorage.getItem("userJWT")).token
@@ -400,7 +400,7 @@ function ProjectPage() {
         })
         .then(result => {
             result = result.data;
-            console.log('Notification sent to ' + result.receiver);
+            // console.log('Notification sent to ' + result.receiver);
             setEmailSnackOpen(true);
         })
         .catch(e => {

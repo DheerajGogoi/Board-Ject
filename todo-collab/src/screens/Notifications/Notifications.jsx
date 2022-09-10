@@ -30,7 +30,7 @@ export default function Notifications() {
         })
         .then((result) => {
             result = result.data;
-            console.log('All Notifications', result);
+            // console.log('All Notifications', result);
             setAllNotifications(result);
         })
         .catch(e => {
@@ -42,7 +42,7 @@ export default function Notifications() {
     }, [])
 
     const handleAcceptInvite = (value) => {
-        console.log("Invite accept", value);
+        // console.log("Invite accept", value);
         setRespLoading(true)
         axios.put(ApiRoute('/api/notifications/response'), {
             notif_id: value._id,
@@ -53,7 +53,7 @@ export default function Notifications() {
             }
         })
         .then(result => {
-            console.log('Invite Accepted');
+            // console.log('Invite Accepted');
             axios.get(ApiRoute('/api/notifications/'+user_cred.email), {
                 headers: {
                     'x-access-token': JSON.parse(localStorage.getItem("userJWT")).token
@@ -61,7 +61,7 @@ export default function Notifications() {
             })
             .then((response) => {
                 response = response.data;
-                console.log('All Notifications', response);
+                // console.log('All Notifications', response);
                 setAllNotifications(response);
             })
             .catch(e => {
@@ -77,7 +77,7 @@ export default function Notifications() {
     }
 
     const handleRejectInvite = (value) => {
-        console.log("Invite Reject", value);
+        // console.log("Invite Reject", value);
         setRespLoading(true)
         axios.put(ApiRoute('/api/notifications/response'), {
             notif_id: value._id,
@@ -88,7 +88,7 @@ export default function Notifications() {
             }
         })
         .then(result => {
-            console.log('Invite Rejected');
+            // console.log('Invite Rejected');
             axios.get(ApiRoute('/api/notifications/'+user_cred.email), {
                 headers: {
                     'x-access-token': JSON.parse(localStorage.getItem("userJWT")).token
@@ -96,7 +96,7 @@ export default function Notifications() {
             })
             .then((response) => {
                 response = response.data;
-                console.log('All Notifications', response);
+                // console.log('All Notifications', response);
                 setAllNotifications(response);
             })
             .catch(e => {

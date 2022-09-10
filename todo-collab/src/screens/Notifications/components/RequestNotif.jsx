@@ -5,7 +5,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import { format } from 'timeago.js';
 
 export default function RequestNotif({ value, handleAcceptInvite, handleRejectInvite }) {
-    console.log('Notification', value);
+    // console.log('Notification', value);
 
     return (
         <div className='req-notif-box'>

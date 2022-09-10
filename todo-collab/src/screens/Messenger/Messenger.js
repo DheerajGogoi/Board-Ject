@@ -37,14 +37,12 @@ export default function Messenger(){
     const history = useHistory();
 
     useEffect(()=>{
-        console.log('entered');
-        const socket_url = process.env.REACT_APP_SOCKET_URL;
-        console.log('Socket URL', socket_url);
-        socket.current = io(socket_url);
-        console.log('socket.current', socket.current);
+        // console.log('entered');
+        socket.current = io('ws://localhost:8900');
+        // console.log('socket.current', socket.current);
         socket.current.on('getMessage', (data) => {
             // console.log('message data',data);
-            console.log('arrival message incoming');
+            // console.log('arrival message incoming');
             setArrivalMessage({
                 sender: data.user_email,
                 text: data.text,
@@ -55,7 +53,7 @@ export default function Messenger(){
     // console.log('Arrival message', arrivalMessage);
 
     useEffect(()=>{
-        console.log('this is current chat and arrival message', currentChat, arrivalMessage)
+        // console.log('this is current chat and arrival message', currentChat, arrivalMessage)
         arrivalMessage && currentChat?.members.includes(arrivalMessage.sender) &&
         setMessages((prev) => [...prev, arrivalMessage])
     }, [arrivalMessage, currentChat])
@@ -63,11 +61,11 @@ export default function Messenger(){
     useEffect(()=>{
         socket.current.emit('addUser', current_user.email);
         socket.current.on('getUsers', (users) => {
-            console.log('Users', users);
+            // console.log('Users', users);
         })
     }, [current_user])
 
-    console.log('Socket', socket);
+    // console.log('Socket', socket);
 
     const url = ApiRoute("/api/conversation/"+current_user.email)
     useEffect(()=>{
@@ -80,7 +78,7 @@ export default function Messenger(){
                     }
                 });
                 setConversation(res.data);
-                console.log('all conv', res.data);
+                // console.log('all conv', res.data);
                 setIsloading(false);
                 // console.log(res.data);
             } catch (error) {
@@ -93,7 +91,7 @@ export default function Messenger(){
 
     useEffect(()=>{
         const getMessages = async() => {
-            console.log('this is convo id', currentChat?._id);
+            // console.log('this is convo id', currentChat?._id);
             try {
                 const res = await axios.get(ApiRoute('/api/messages/'+currentChat?._id), {
                     headers: {
@@ -121,7 +119,7 @@ export default function Messenger(){
                 (member) => member !== current_user.email
             );
 
-            console.log('receiver email', receiver_email);
+            // console.log('receiver email', receiver_email);
 
             socket.current.emit('sendMessage', {
                 sender_email: current_user.email,
@@ -157,7 +155,7 @@ export default function Messenger(){
             }
         })
         .then(result => {
-            console.log(result);
+            // console.log(result);
             result = result.data;
             history.push(`/projects/${result.id}`);
         })

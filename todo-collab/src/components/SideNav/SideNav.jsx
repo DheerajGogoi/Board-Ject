@@ -150,7 +150,7 @@ function SideNav(props) {
         })
         .then((result) => {
             result = result.data;
-            console.log('All Notifications', result);
+            // console.log('All Notifications', result);
             setAllNotifications(result);
             dispatch(notifActions.setNotifications({
                 notifications: result

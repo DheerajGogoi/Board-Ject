@@ -7,18 +7,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 
 export default function MConversation({ conversation, currentUser, index }){
     const [user, setUser] = useState(null);
-
-    useEffect(()=>{
-
-        const getUser = async () => {
-            try {
-                
-            } catch (error) {
-                console.log(error);
-            }
-        }
-        getUser();
-    }, [currentUser, conversation]);
     
     return(
         <ListItem button>

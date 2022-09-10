@@ -98,11 +98,11 @@ function Stats() {
                     }
                 }
         
-                console.log([
-                    {status: 1, no_of_projects: no_status_count},
-                    {status: 2, no_of_projects: pending_count},
-                    {status: 3, no_of_projects: completed_count}
-                ]);
+                // console.log([
+                //     {status: 1, no_of_projects: no_status_count},
+                //     {status: 2, no_of_projects: pending_count},
+                //     {status: 3, no_of_projects: completed_count}
+                // ]);
                 setMonthStats([
                     {status: 1, no_of_projects: no_status_count},
                     {status: 2, no_of_projects: pending_count},
@@ -125,7 +125,7 @@ function Stats() {
 
         const currMonthIndex = months.indexOf(event.target.value) + 1;
 
-        console.log(months.indexOf(event.target.value) + 1, currYear);
+        // console.log(months.indexOf(event.target.value) + 1, currYear);
 
         let no_status_count = 0;
         let pending_count = 0;
@@ -148,11 +148,11 @@ function Stats() {
             }
         }
 
-        console.log([
-            {status: 1, no_of_projects: no_status_count},
-            {status: 2, no_of_projects: pending_count},
-            {status: 3, no_of_projects: completed_count}
-        ]);
+        // console.log([
+        //     {status: 1, no_of_projects: no_status_count},
+        //     {status: 2, no_of_projects: pending_count},
+        //     {status: 3, no_of_projects: completed_count}
+        // ]);
         setMonthStats([
             {status: 1, no_of_projects: no_status_count},
             {status: 2, no_of_projects: pending_count},
@@ -164,7 +164,7 @@ function Stats() {
     const handleYearChange = (event) => {
         setCurrYear(event.target.value);
 
-        console.log(months.indexOf(currMonth) + 1, event.target.value);
+        // console.log(months.indexOf(currMonth) + 1, event.target.value);
 
         let no_status_count = 0;
         let pending_count = 0;
@@ -187,11 +187,11 @@ function Stats() {
             }
         }
 
-        console.log([
-            {status: 1, no_of_projects: no_status_count},
-            {status: 2, no_of_projects: pending_count},
-            {status: 3, no_of_projects: completed_count}
-        ]);
+        // console.log([
+        //     {status: 1, no_of_projects: no_status_count},
+        //     {status: 2, no_of_projects: pending_count},
+        //     {status: 3, no_of_projects: completed_count}
+        // ]);
         setMonthStats([
             {status: 1, no_of_projects: no_status_count},
             {status: 2, no_of_projects: pending_count},
