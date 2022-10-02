@@ -1,4 +1,5 @@
 .login-screen{
+    overflow-x: hidden;
 
     .login-container{
         .row{
@@ -6,8 +7,16 @@
             .col-lg-6{
                 h1{
                     text-align: center;
-                    margin-top: 4rem;
-                    margin-bottom: 3rem;
+                    margin-top: 2rem;
+                    font-size: 2rem;
+                    font-weight: bolder;
+                }
+
+                .welc-desc{
+                    text-align: center;
+                    font-size: 14px;
+                    color: gray;
+                    margin-bottom: 4rem;
                 }
         
                 .login-form{
@@ -26,6 +35,18 @@
                                 width: 350px;
                             }
                         }
+                    }
+
+                    .reg-desc{
+                        margin-top: 3rem;
+                        font-size: 14px;
+                    }
+                }
+
+                .image-container{
+
+                    .login-image{
+                        margin-top: 6rem;
                     }
                 }
             }

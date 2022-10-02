@@ -10,10 +10,6 @@ export default function Conversation({ conversation, currentUser, index }){
     
     return(
         <ListItem button style={{
-            // border: '1px solid black',
-            // borderBottom: index !== 0 ? '1px solid black' : '',
-            // borderBottom: index !== 0 ? '1px solid black' : '',
-            // borderBottom: '1px solid grey',
         }}>
             <div>
                 <div><ListItemText>{conversation.project.project_name}</ListItemText></div>

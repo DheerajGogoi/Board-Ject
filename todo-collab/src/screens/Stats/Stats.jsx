@@ -207,7 +207,7 @@ function Stats() {
                 <div className='stats-container container'>
                     <div className='chart-container'>
                         <div className='chart-1'>
-                            <div className='header-1'>All Time Projects Stats</div>
+                            <div className='header-1'>All Time Project Stats</div>
                             <VictoryChart
                                 theme={VictoryTheme.material}
                                 domainPadding={50}

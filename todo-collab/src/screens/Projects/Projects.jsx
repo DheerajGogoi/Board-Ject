@@ -6,7 +6,7 @@ import {
     MuiPickersUtilsProvider,
     KeyboardDatePicker,
 } from '@material-ui/pickers';
-import { Backdrop, Button, CircularProgress, IconButton, TextField } from '@material-ui/core';
+import { Backdrop, Button, CircularProgress, Divider, IconButton, TextField } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
 import { authActions } from '../../redux-store/store';
 import Navbar from '../../components/Navbar/Navbar';
@@ -554,13 +554,8 @@ function Projects() {
                         }}
                     >
                         <Fade in={openModal}>
-                            <div style={{
-                                backgroundColor: 'white',
-                                padding: '20px',
-                                width: '70%',
-                                height: '70%',
-                                border: '1px solid black',
-                                overflowY: 'scroll'
+                            <div className='modal-content' style={{
+                                
                             }}>
                             <>
                                 <Backdrop open={projUploading} style={{zIndex: '9999999'}}>
@@ -569,15 +564,19 @@ function Projects() {
                                     }} />
                                 </Backdrop>
                             </>
-                                <div className='add-proj-box' style={{
+                                <div className='add-proj-box container' style={{
                                     display: 'block',
-                                    textAlign: 'center'
+                                    margin: 'auto'
+                                    // textAlign: 'center'
                                 }}>
+                                    <p className='create-title' style={{
+                                        fontSize: '1.4rem',
+                                        fontWeight: 'bolder'
+                                    }}>Create New Project</p>
                                     <form onSubmit={handleAddTask} autoComplete='off' style={{
                                         display: 'inline-block',
-                                        marginLeft: 'auto',
-                                        marginRight: 'auto',
-                                        textAlign: 'left'
+                                        textAlign: 'left',
+                                        width: '100%'
                                     }}>
                                         
                                         <div style={{
@@ -589,7 +588,8 @@ function Projects() {
                                                 value={projTitle}
                                                 onChange={(e)=>setProjTitle(e.target.value)}
                                                 style={{
-                                                    width: '500px'
+                                                    // width: '500px'
+                                                    width: '100%'
                                                 }}
                                                 required
                                             />
@@ -605,7 +605,8 @@ function Projects() {
                                                 value={projDesc}
                                                 onChange={(e)=>setProjDesc(e.target.value)}
                                                 style={{
-                                                    width: '500px'
+                                                    // width: '500px'
+                                                    width: '100%'
                                                 }}
                                                 required
                                             />
@@ -626,18 +627,19 @@ function Projects() {
                                                         'aria-label': 'change date',
                                                     }}
                                                     style={{
-                                                        width: '500px'
+                                                        // width: '500px'
+                                                        width: '100%'
                                                     }}
                                                 />
                                             </MuiPickersUtilsProvider>
                                         </div>
 
                                         <div style={{
-                                            marginBottom: '2rem'
                                         }}>
                                             <p>Choose a project cover photo</p>
                                             <input type="file" onChange={handleThumbChange} style={{
-                                                    width: '500px'
+                                                    // width: '500px'
+                                                    width: '100%'
                                                 }} />
 
                                             <br />
@@ -647,19 +649,33 @@ function Projects() {
 
                                         </div>
 
+                                        <Divider />
+
                                         <Button
-                                        variant='outlined'
+                                        variant='contained'
                                         type='submit'
+                                        disableElevation
                                         style={{
-                                            marginRight: '1.2rem'
+                                            marginTop: '2rem',
+                                            textTransform: 'none',
+                                            backgroundColor: 'black',
+                                            fontWeight: 'bold',
+                                            color: 'white',
+                                            float: 'right'
                                         }}
                                         >
-                                            Add Task
+                                            Save Project
                                         </Button>
                                         
                                         <Button
-                                        variant='outlined'
                                         onClick={handleModalClose}
+                                        style={{
+                                            marginRight: '1.2rem',
+                                            marginTop: '2rem',
+                                            textTransform: 'none',
+                                            fontWeight: 'bold',
+                                            float: 'right'
+                                        }}
                                         >
                                             Cancel
                                         </Button>

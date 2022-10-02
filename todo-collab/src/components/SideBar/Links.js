@@ -26,7 +26,7 @@ export const links = [
     },
     {
         path: '/stats',
-        title: 'Projects Stats',
+        title: 'Project Stats',
         icon: <>
             <EqualizerOutlinedIcon />
         </>

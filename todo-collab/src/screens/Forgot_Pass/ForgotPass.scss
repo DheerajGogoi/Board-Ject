@@ -5,6 +5,8 @@
             text-align: center;
             margin-top: 4rem;
             margin-bottom: 3rem;
+            font-size: 2rem;
+            font-weight: bolder;
         }
 
         .login-form{
@@ -22,6 +24,12 @@
                         margin-bottom: 2rem;
                         width: 350px;
                     }
+                }
+
+                .go-back{
+                    color: black;
+                    font-size: 14px;
+                    font-weight: bolder;
                 }
             }
         }

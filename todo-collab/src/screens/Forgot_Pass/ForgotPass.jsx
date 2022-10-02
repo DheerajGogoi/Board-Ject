@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { auth } from '../../firebase';
 import { Button, CircularProgress, Snackbar, TextField } from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
+import { Link } from 'react-router-dom';
 
 export default function ForgotPass() {
     const [isLoading, setIsLoading] = useState(false);
@@ -55,18 +56,21 @@ export default function ForgotPass() {
                         />
                     </div>
 
-                    <Button variant='contained' type='submit' style={{
-                        width: '350px',
+                    <Button variant='contained' type='submit' disableElevation style={{
+                        width: '100%',
+                        backgroundColor: 'black',
+                        color: 'white',
+                        textTransform: 'none'
                     }}>
                         {!isLoading ? 'Submit' : <CircularProgress size={25} style={{
-                            color: 'black',
+                            color: 'white',
                         }} />}
                     </Button>
                     <br />
                     <br />
-                    <Button variant='outlined' onClick={()=>history.goBack()}>
-                        Go Back
-                    </Button>
+                    <Link className='go-back' variant='outlined' to='/login'>
+                        &#8592; Go Back
+                    </Link>
                 </form>
             </div>
 

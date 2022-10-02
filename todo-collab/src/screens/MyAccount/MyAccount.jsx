@@ -231,8 +231,12 @@ export default function MyAccount() {
                                 variant='contained'
                                 color='primary'
                                 style={{
-                                    textTransform: 'none'
+                                    textTransform: 'none',
+                                    backgroundColor: 'black',
+                                    color: 'white',
+                                    fontWeight: 'bolder'
                                 }}
+                                disableElevation
                                 onClick={handleModalOpen}
                                 >
                                     <CreateIcon style={{ fontSize: '18px', marginRight: '10px' }} /> Edit Profile Picture
@@ -286,8 +290,11 @@ export default function MyAccount() {
                             disabled={!changeVal}
                             className='form-btn'
                             type='submit'
-                            color='primary'
+                            color='secondary'
                             variant='contained'
+                            style={{
+                                fontWeight: 'bolder',
+                            }}
                             >
                                 {
                                     accUpdating && <CircularProgress size={24} style={{
@@ -318,83 +325,71 @@ export default function MyAccount() {
                             }}
                         >
                             <Fade in={openModal}>
-                                <div style={{
-                                    backgroundColor: 'white',
-                                    padding: '20px',
-                                    width: '70%',
-                                    height: '70%',
-                                    border: '1px solid black',
-                                    overflowY: 'scroll'
-                                }}>
-                                    <div className='add-proj-box' style={{
-                                        display: 'flex',
-                                        justifyContent: 'space-evenly',
-                                        flexDirection: 'column',
-                                        minHeight: '100%'
-                                    }}>
-                                        <div style={{
-                                            alignSelf: 'center',
-                                            textAlign: 'center'
-                                        }}>
+                                <div className='acc-modal'>
+                                    <div>
+                                        <div>
                                             <p>Choose a Profile Picture</p>
-                                            <input type="file" onChange={handleThumbChange} />
+                                            <input type="file" onChange={handleThumbChange} style={{
+                                                marginBottom: '2rem'
+                                            }} />
                                         </div>
 
-                                        <br />
-                                        <br />
+                                        <div>
+                                            {selectProfileUrl && <img src={selectProfileUrl} className='img-fluid prof-image' alt="thumbnail" style={{margin: 'auto' }} />}
 
-                                        <div style={{
-                                            textAlign: 'center'
-                                        }}>
-                                            {selectProfileUrl && <img src={selectProfileUrl} alt="thumbnail" style={{ width: '300px' }} />}
+                                            <div className='p-btn-grp'>
+                                                <div style={{
+                                                    display: profileUrl === '' ? 'none' : 'block'
+                                                }}>
+                                                    <Button
+                                                    variant='contained'
+                                                    disableElevation
+                                                    color='primary'
+                                                    style={{
+                                                        textTransform: 'none',
+                                                        backgroundColor: 'black',
+                                                        fontWeight: 'bolder',
+                                                        color: 'white'
+                                                    }}
+                                                    onClick={thumbDeleteHandler}
+                                                    >
+                                                        Delete Photo
+                                                    </Button>
+                                                </div>
 
-                                            <div style={{
-                                                display: profileUrl === '' ? 'none' : 'block'
-                                            }}>
-                                                <Button
-                                                variant='outlined'
-                                                disableElevation
-                                                color='primary'
-                                                style={{
-                                                    textTransform: 'none',
-                                                    marginTop: '2rem'
-                                                }}
-                                                onClick={thumbDeleteHandler}
-                                                >
-                                                    Delete Photo
-                                                </Button>
-                                            </div>
+                                                <div style={{
+                                                    display: selectProfileUrl !== '' ? 'block' : 'none'
+                                                }}>
+                                                    <Button
+                                                    variant='contained'
+                                                    disableElevation
+                                                    color='primary'
+                                                    style={{
+                                                        textTransform: 'none',
+                                                        backgroundColor: 'black',
+                                                        fontWeight: 'bolder',
+                                                        color: 'white'
+                                                    }}
+                                                    onClick={thumbUpdateHandler}
+                                                    >
+                                                        Set Thumbnail
+                                                    </Button>
+                                                </div>
 
-                                            <div style={{
-                                                display: selectProfileUrl !== '' ? 'block' : 'none'
-                                            }}>
-                                                <Button
-                                                variant='outlined'
-                                                disableElevation
-                                                color='primary'
-                                                style={{
-                                                    textTransform: 'none',
-                                                    marginTop: '2rem'
-                                                }}
-                                                onClick={thumbUpdateHandler}
-                                                >
-                                                    Set Thumbnail
-                                                </Button>
-                                            </div>
-
-                                            <div>
-                                                <Button
-                                                variant='outlined'
-                                                disableElevation
-                                                color='primary'
-                                                style={{
-                                                    textTransform: 'none',
-                                                    marginTop: '2rem'
-                                                }}
-                                                onClick={updateThumbCancelHandler}
-                                                >
-                                                    Cancel
-                                                </Button>
+                                                <div>
+                                                    <Button
+                                                    disableElevation
+                                                    color='primary'
+                                                    style={{
+                                                        textTransform: 'none',
+                                                        fontWeight: 'bolder',
+                                                        color: 'black'
+                                                    }}
+                                                    onClick={updateThumbCancelHandler}
+                                                    >
+                                                        Cancel
+                                                    </Button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

@@ -7,6 +7,9 @@ import { auth, db } from '../../firebase';
 import { useHistory } from 'react-router';
 import axios from 'axios';
 import { ApiRoute } from '../../Util';
+import register_page from '../../images/register_page.png'
+import icon from '../../images/icon.png';
+import { Link } from 'react-router-dom';
 
 export default function Register() {
     const [isLoading, setIsLoading] = useState(false);
@@ -88,21 +91,20 @@ export default function Register() {
                     }} />
                 </Backdrop>
             </>
-            <div className='register-container container'>
+            <div className='register-container'>
                 <div className='row'>
 
-                    <div className='col-lg-6'></div>
-
                     <div className='col-lg-6'>
+                        <Header />
 
-                        <h1>Register Screen</h1>
+                        <h1>Create an account</h1>
+                        <p className='welc-desc'>Welcome back! Please enter your details.</p>
                         <div className='register-form'>
                             <form autoComplete='off' onSubmit={handleRegister}>
                                 <div>
                                     <TextField
                                     placeholder='First Name'
                                     id="outlined-basic"
-                                    variant="outlined"
                                     value={fName}
                                     onChange={(e)=>setFname(e.target.value)}
                                     required
@@ -114,7 +116,6 @@ export default function Register() {
                                     <TextField
                                     placeholder='Last name'
                                     id="outlined-basic"
-                                    variant="outlined"
                                     value={lName}
                                     onChange={(e)=>setLname(e.target.value)}
                                     required
@@ -127,7 +128,6 @@ export default function Register() {
                                     placeholder='Email'
                                     type='email'
                                     id="outlined-basic"
-                                    variant="outlined"
                                     value={email}
                                     onChange={(e)=>setEmail(e.target.value)}
                                     required
@@ -140,7 +140,6 @@ export default function Register() {
                                     placeholder='Password'
                                     type='password'
                                     id="outlined-basic"
-                                    variant="outlined"
                                     value={pass}
                                     onChange={(e)=>setPass(e.target.value)}
                                     required
@@ -148,22 +147,61 @@ export default function Register() {
                                     />
                                 </div>
 
-                                <Button variant='contained' type='submit' style={{
-                                    width: '100%'
+                                <Button variant='contained' type='submit' disableElevation style={{
+                                    width: '100%',
+                                    backgroundColor: 'black',
+                                    color: 'white',
+                                    textTransform: 'none'
                                 }}>Register</Button>
+
                             </form>
                             
-                            <br />
-                            <br />
 
-                            <Button style={{
+                            {/* <Button style={{
                                 textTransform: 'none',
                                 marginTop: '30px'
-                            }} variant='outlined' onClick={()=>history.push('/login')} >Already have an account ?</Button>
+                            }} variant='outlined' onClick={()=>history.push('/login')} >Already have an account ?</Button> */}
+
+                            <p className='log-desc'>Already have an account? <Link onClick={()=>{}} to='/login' style={{
+                                color: 'black',
+                                fontWeight: 'bold'
+                            }}>Sign in</Link></p>
 
                         </div>
                     </div>
+
+                    <div className='col-lg-6'>
+                        <div className='image-container'>
+                            <img src={register_page} alt='Register Page Image' className='img-fluid register-image' />
+                        </div>
+                    </div>
+
                 </div>
+            </div>
+        </div>
+    )
+}
+
+const Header = () => {
+    return(
+        <div style={{
+            padding: '14px',
+            fontWeight: 'bolder',
+            fontSize: '2rem'
+        }}>
+            <div style={{
+                display: 'flex',
+                flexDirection: 'row',
+                gap: '10px'
+            }}>
+                <img src={icon} alt='Icon' className='img-fluid' style={{
+                    width: '80px',
+                    alignSelf: 'center'
+                }} />
+                <p style={{
+                    alignSelf: 'center',
+                    marginTop: '20px'
+                }}>BoardJect</p>
             </div>
         </div>
     )

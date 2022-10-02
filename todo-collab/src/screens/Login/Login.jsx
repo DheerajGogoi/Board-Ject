@@ -8,6 +8,8 @@ import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import { ApiRoute } from '../../Util';
 import axios from 'axios';
+import login_page from '../../images/login_page.png'
+import icon from '../../images/icon.png'
 
 function Login() {
     const [isLoading, setIsLoading] = useState(false);
@@ -58,14 +60,15 @@ function Login() {
 
     return (
         <div className='login-screen'>
-            <div className='login-container container'>
+            <div className='login-container'>
                 
                 <div className='row'>
-                    <div className='col-lg-6'></div>
                     
                     <div className='col-lg-6'>
+                        <Header />
 
-                        <h1>Login Screen</h1>
+                        <h1>Welcome!</h1>
+                        <p className='welc-desc'>Welcome back! Please enter your details.</p>
                         <div className='login-form'>
                             <form autoComplete='off' onSubmit={handleLogin}>
                                 <div>
@@ -73,7 +76,6 @@ function Login() {
                                     placeholder='Email'
                                     type='email'
                                     id="outlined-basic"
-                                    variant="outlined"
                                     value={email}
                                     onChange={(e)=>setEmail(e.target.value)}
                                     required
@@ -86,7 +88,6 @@ function Login() {
                                     placeholder='Password'
                                     type='password'
                                     id="outlined-basic"
-                                    variant="outlined"
                                     value={pass}
                                     onChange={(e)=>setPass(e.target.value)}
                                     required
@@ -94,29 +95,75 @@ function Login() {
                                     />
                                 </div>
 
+                                <div>
+                                    <Link to='/forgot_password' style={{
+                                        textAlign: 'right',
+                                        float: 'right',
+                                        color: 'black',
+                                        fontSize: '14px',
+                                        textDecoration: 'underline',
+                                    }}>Forgot Password</Link>
+                                </div>
+
                                 <Button variant='contained' type='submit' style={{
                                     width: '350px',
-                                }}>
-                                    {!isLoading ? 'Login' : <CircularProgress size={25} style={{
-                                        color: 'black',
+                                    backgroundColor: 'black',
+                                    color: 'white',
+                                    marginTop: '2rem',
+                                    textTransform: 'none'
+                                }} disableElevation>
+                                    {!isLoading ? 'Log in' : <CircularProgress size={25} style={{
+                                        color: 'white',
                                     }} />}
                                 </Button>
-                                <br />
-                                <br />
-                                <Link to='/forgot_password'>Forgot Password ?</Link>
+                                
                             </form>
 
-                            <br />
-
-                            <Button style={{
+                            {/* <Button style={{
                                 textTransform: 'none',
                                 marginTop: '30px'
-                            }} variant='outlined' onClick={()=>history.push('/register')} >New user ? Create an account</Button>
+                            }} variant='outlined' onClick={()=>history.push('/register')} >New user ? Create an account</Button> */}
+                            <p className='reg-desc'>Don't have an account? <Link onClick={()=>{}} to='/register' style={{
+                                color: 'black',
+                                fontWeight: 'bold'
+                            }}>Sign up for free</Link></p>
                         </div>
 
                     </div>
+
+                    <div className='col-lg-6'>
+                        <div className='image-container'>
+                            <img src={login_page} alt='Login Page Image' className='img-fluid login-image' />
+                        </div>
+                    </div>
+
                 </div>
 
+            </div>
+        </div>
+    )
+}
+
+const Header = () => {
+    return(
+        <div style={{
+            padding: '14px',
+            fontWeight: 'bolder',
+            fontSize: '2rem'
+        }}>
+            <div style={{
+                display: 'flex',
+                flexDirection: 'row',
+                gap: '10px'
+            }}>
+                <img src={icon} alt='Icon' className='img-fluid' style={{
+                    width: '80px',
+                    alignSelf: 'center'
+                }} />
+                <p style={{
+                    alignSelf: 'center',
+                    marginTop: '20px'
+                }}>BoardJect</p>
             </div>
         </div>
     )

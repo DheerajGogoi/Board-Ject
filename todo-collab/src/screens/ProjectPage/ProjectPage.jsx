@@ -499,9 +499,12 @@ function ProjectPage() {
                                     variant='contained'
                                     color='primary'
                                     style={{
-                                        textTransform: 'none'
+                                        textTransform: 'none',
+                                        backgroundColor: 'black',
+                                        fontWeight: 'bolder'
                                     }}
                                     onClick={handleModalOpen}
+                                    disableElevation
                                     >
                                         <CreateIcon style={{
                                             fontSize: '18px',
@@ -562,7 +565,7 @@ function ProjectPage() {
 
                             {projAdmins.includes(user_cred.email) && <>
                                 <div className='input'>
-                                    <Button className='add-more-btn' variant='contained' onClick={() => handleEmailModalOpen()}>
+                                    <Button className='add-more-btn' variant='contained' onClick={() => handleEmailModalOpen()} disableElevation>
                                         Add More Members to Project
                                     </Button>
                                 </div>
@@ -679,6 +682,7 @@ function ProjectPage() {
                             type='submit'
                             color='primary'
                             variant='contained'
+                            disableElevation
                             >
                                 {
                                     projUpdating && <CircularProgress size={24} style={{
@@ -694,7 +698,10 @@ function ProjectPage() {
                             <Button variant="contained" color="secondary" onClick={() => {
                                 handleRemoveMembers(user_cred.email);
                                 handleNav();
-                            }}>
+                            }} style={{
+                                textTransform: 'none',
+                                fontWeight: 'bolder'
+                            }} disableElevation >
                                 Leave Project
                             </Button>
 
@@ -719,90 +726,74 @@ function ProjectPage() {
                         // onClose={handleModalClose}
                     >
                         <Fade in={openModal}>
-                            <div style={{
-                                backgroundColor: 'white',
-                                padding: '20px',
-                                width: '50%',
-                                height: '50%',
-                                border: '1px solid black',
-                                overflowY: 'scroll'
-                            }}>
-                                <div className='add-proj-box' style={{
-                                    display: 'flex',
-                                    justifyContent: 'space-evenly',
-                                    flexDirection: 'column',
-                                    minHeight: '100%'
-                                }}>
-                                    <div style={{
-                                        alignSelf: 'center',
-                                        textAlign: 'center'
-                                    }}>
-                                        <p>Choose a project cover photo</p>
+                            <div className='proj-thumb-modal'>
+                                <div className='add-proj-box'>
+                                    <div>
+                                        <p className='modal-title'>Choose a project cover photo</p>
                                         <input type="file" onChange={handleThumbChange} />
                                     </div>
 
                                     <br />
                                     <br />
 
-                                    <div style={{
-                                        textAlign: 'center'
-                                    }}>
-                                        {selectThumbUrl && <img src={selectThumbUrl} alt="thumbnail" style={{ width: '300px' }} />}
+                                    <div>
+                                        {selectThumbUrl && <img src={selectThumbUrl} alt="thumbnail" className='img-fluid' />}
 
-                                        <div style={{
-                                            display: projThumbUrl === '' ? 'none' : 'block'
-                                        }}>
-                                            <Button
-                                            variant='outlined'
-                                            disableElevation
-                                            color='primary'
-                                            style={{
-                                                textTransform: 'none',
-                                                marginTop: '2rem'
-                                            }}
-                                            onClick={thumbDeleteHandler}
-                                            >
-                                                Delete Thumbnail
-                                            </Button>
-                                        </div>
+                                        <div className='t-btn-grp'>
+                                            <div style={{
+                                                display: projThumbUrl === '' ? 'none' : 'block'
+                                            }}>
+                                                <Button
+                                                variant='contained'
+                                                disableElevation
+                                                color='primary'
+                                                style={{
+                                                    textTransform: 'none',
+                                                    backgroundColor: 'black',
+                                                    fontWeight: 'bolder',
+                                                    color: 'white'
+                                                }}
+                                                onClick={thumbDeleteHandler}
+                                                >
+                                                    Delete Thumbnail
+                                                </Button>
+                                            </div>
 
-                                        <div style={{
-                                            display: selectThumbUrl !== '' ? 'block' : 'none'
-                                        }}>
-                                            <Button
-                                            variant='outlined'
-                                            disableElevation
-                                            color='primary'
-                                            style={{
-                                                textTransform: 'none',
-                                                marginTop: '2rem'
-                                            }}
-                                            onClick={thumbUpdateHandler}
-                                            >
-                                                Set Thumbnail
-                                            </Button>
-                                        </div>
+                                            <div style={{
+                                                display: selectThumbUrl !== '' ? 'block' : 'none'
+                                            }}>
+                                                <Button
+                                                variant='contained'
+                                                disableElevation
+                                                color='primary'
+                                                style={{
+                                                    textTransform: 'none',
+                                                    backgroundColor: 'black',
+                                                    fontWeight: 'bolder',
+                                                    color: 'white'
+                                                }}
+                                                onClick={thumbUpdateHandler}
+                                                >
+                                                    Set Thumbnail
+                                                </Button>
+                                            </div>
 
-                                        <div>
-                                            <Button
-                                            variant='outlined'
-                                            disableElevation
-                                            color='primary'
-                                            style={{
-                                                textTransform: 'none',
-                                                marginTop: '2rem'
-                                            }}
-                                            onClick={updateThumbCancelHandler}
-                                            >
-                                                Cancel
-                                            </Button>
+                                            <div>
+                                                <Button
+                                                disableElevation
+                                                color='primary'
+                                                style={{
+                                                    textTransform: 'none',
+                                                    fontWeight: 'bolder',
+                                                    color: 'black'
+                                                }}
+                                                onClick={updateThumbCancelHandler}
+                                                >
+                                                    Cancel
+                                                </Button>
+                                            </div>
                                         </div>
                                     </div>
-                                    {/* <div style={{
-                                        alignSelf: 'center'
-                                    }}>
-                                        
-                                    </div> */}
                                 </div>
                             </div>
                         </Fade>
@@ -843,48 +834,10 @@ function ProjectPage() {
                         onClose={handleEmailModalClose}
                     >
                         <Fade in={addEmailModal}>
-                            <div style={{
-                                backgroundColor: 'white',
-                                padding: '20px',
-                                width: '50%',
-                                height: '50%',
-                                border: '1px solid black',
-                                overflowY: 'scroll'
-                            }}>
-                                <div className='add-proj-box'>
-                                    <div style={{
-                                        alignSelf: 'center',
-                                        textAlign: 'center'
-                                    }}>
-                                        <p><b>Add Project Members</b></p>
-                                        {/* <div className='input'>
-                                            <div className='auto-comp-container'>
-                                                <div className='auto-comp'>
-                                                    <Autocomplete
-                                                        id="combo-box-demo"
-                                                        options={emails}
-                                                        getOptionLabel={(option) => option.title}
-                                                        renderInput={(params) => 
-                                                            <TextField
-                                                            {...params}
-                                                            label="Email"
-                                                            variant="outlined"
-                                                            value={memberEmail}
-                                                            />
-                                                        }
-                                                        onChange={e => {
-                                                            setMemberEmail(e.target.innerHTML);
-                                                        }}
-                                                    />
-                                                </div>
-
-                                                <br />
-
-                                                <Button variant='contained' onClick={() => handleSendInvite()}>
-                                                    Send
-                                                </Button>
-                                            </div>
-                                        </div> */}
+                            <div className='add-mem-modal'>
+                                <div>
+                                    <div>
+                                        <p>Add Project Members</p>
 
                                         <div>
                                             <form onSubmit={handleSendInvite}>
@@ -904,15 +857,12 @@ function ProjectPage() {
                                                     />
                                                 </div>
 
-                                                <Button variant='contained' type='submit'>
+                                                <Button variant='contained' type='submit' className='send-invite-btn' disableElevation>
                                                     Send
                                                 </Button>
                                             </form>
                                         </div>
                                     </div>
-
-                                    <br />
-                                    <br />
 
                                 </div>
                             </div>
@@ -942,47 +892,3 @@ function ProjectPage() {
 }
 
 export default ProjectPage
-
-
-
-// <div className='input'>
-//     <div className='auto-comp-container'>
-//         <div className='auto-comp'>
-//             <Autocomplete
-//                 id="combo-box-demo"
-//                 options={emails}
-//                 getOptionLabel={(option) => option.title}
-//                 renderInput={(params) => 
-//                     <TextField
-//                     {...params}
-//                     label="Email"
-//                     variant="outlined"
-//                     value={memberEmail}
-//                     />
-//                 }
-//                 onChange={e => {
-//                     console.log(e.target.innerHTML);
-//                     setMemberEmail(e.target.innerHTML);
-//                 }}
-//             />
-//         </div>
-
-//         <div style={{
-//             alignSelf: 'center'
-//         }}>
-//             <Button variant='contained' onClick={()=>{
-//                 if(memberEmail.trim() !== ''){
-//                     if(projMembers.includes(memberEmail)){
-//                         alert('Member already added!!')
-//                     } else {
-//                         setProjMembers(prev => [memberEmail, ...prev]);
-//                         setMemberEmail('');
-//                         setChangeVal(true);
-//                     }
-//                 }
-//             }}>
-//                 <AddIcon />
-//             </Button>
-//         </div>
-//     </div>
-// </div>

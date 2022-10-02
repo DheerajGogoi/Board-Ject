@@ -23,6 +23,11 @@
                     flex-direction: row;
                     margin-left: -1.5rem;
                     padding: 10px;
+
+                    h1{
+                        font-size: 2rem;
+                        font-weight: bold;
+                    }
                 }
 
                 .proj-thumb-box{
@@ -163,5 +168,67 @@
 
     .add-proj-box{
         display: flex;
+    }
+}
+
+.proj-thumb-modal{
+    background-color: white;
+    padding: 20px;
+    width: 50%;
+    height: 60%;
+    border: 1px solid black;
+    overflow-y: scroll;
+
+    .modal-title{
+        font-weight: bolder;
+        margin-bottom: 1rem;
+        font-size: 1.2rem;
+    }
+
+    .t-btn-grp{
+        display: flex;
+        flex-direction: row-reverse;
+        gap: 10px;
+        margin-top: 2rem;
+    }
+}
+
+@media screen and (max-width: 780px) {
+    .proj-thumb-modal{
+        width: 90%;
+        height: 70%;
+    }
+}
+
+.add-mem-modal{
+    background-color: white;
+    padding: 20px;
+    width: 40%;
+    height: 30%;
+    border: 1px solid black;
+    overflow-y: scroll;
+
+    p{
+        font-weight: bolder;
+    }
+
+    .input-field{
+        width: 100%;
+    }
+
+    .send-invite-btn{
+        text-transform: none;
+        background-color: black;
+        font-weight: bolder;
+        color: white;
+        margin-top: 1.4rem;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 780px) {
+    .add-mem-modal{
+        width: 90%;
+        height: 25%;
     }
 }

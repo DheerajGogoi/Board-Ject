@@ -117,7 +117,7 @@ function SideNav(props) {
     const [currentTab, setCurrentTab] = useState(
         history.location.pathname === '/projects' ? 'Projects' :
         history.location.pathname === '/chats' ? 'Chats' :
-        history.location.pathname === '/stats' ? 'Projects Stats' :
+        history.location.pathname === '/stats' ? 'Project Stats' :
         history.location.pathname === '/calendar' ? 'Calendar' :
         history.location.pathname === '/account' ? 'My Account' :
         history.location.pathname === '/notifications' ? 'Notifications' :

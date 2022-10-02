@@ -45,14 +45,25 @@
     .add-proj-box{
         display: block;
         text-align: center;
-        form{
-            display: inline-block;
-            margin-left: auto;
-            margin-right: auto;
-            text-align: left;
-            .input{
-                margin-bottom: 2rem;
-            }
+
+        .create-title{
+            font-weight: bolder;
+            font-size: 2rem;
         }
+    }
+}
+
+.modal-content{
+    background-color: white;
+    padding: 20px;
+    width: 70%;
+    height: 70%;
+    border: 1px solid black;
+    overflow-y: scroll
+}
+
+@media screen and (max-width: 450px){
+    .modal-content{
+        width: 90%;
     }
 }

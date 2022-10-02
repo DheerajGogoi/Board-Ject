@@ -43,6 +43,17 @@
                     .input-field{
                         // width: 100%;
                     }
+                    
+                }
+                @media screen and (max-width: 400px) {
+                    .input-grp{
+                        width: 100%;
+    
+                        .input-field{
+                            width: 100%;
+                        }
+                        
+                    }
                 }
 
                 .form-btn{
@@ -101,5 +112,35 @@
                 }
             }
         }
+    }
+}
+
+.acc-modal{
+    background-color: white;
+    padding: 20px;
+    width: 50%;
+    height: 70%;
+    border: 1px solid black;
+    overflow-y: scroll;
+
+    p{
+        font-weight: bolder;
+    }
+
+    .p-btn-grp{
+        display: flex;
+        flex-direction: row-reverse;
+        gap: 10px;
+        margin-top: 2rem;
+    }
+
+    .prof-image{
+    }
+}
+
+@media screen and (max-width: 780px) {
+    .acc-modal{
+        width: 90%;
+        height: 70%;
     }
 }
